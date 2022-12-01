@@ -5,8 +5,8 @@ let sums = []
 groups.forEach(group => {
 	const array = group.split('\n')
 	
-	const sum = array.map((elt) => {
-		return /^\d+$/.test(elt) ? parseInt(elt) : 0
+	const sum = array.map((el) => {
+		return /^\d+$/.test(el) ? parseInt(el) : 0
 	})
 	.reduce((a, b) => {
 		return a + b
