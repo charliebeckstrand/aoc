@@ -8,11 +8,11 @@ groups.forEach(group => {
 	let array = group.split('\n')
 	
 	const sum = array.map((elt) => {
-    return /^\d+$/.test(elt) ? parseInt(elt) : 0
-  })
-  .reduce((a, b) => {
-    return a + b
-  })
+		return /^\d+$/.test(elt) ? parseInt(elt) : 0
+	})
+	.reduce((a, b) => {
+		return a + b
+	})
 	
 	sums.push(sum)
 })
@@ -22,17 +22,24 @@ function findLargest () {
 	return Math.max(...sums)
 }
 
-
 function findLargest3 () {
 	sums.sort((a, b) => a < b ? 1 : a > b ? -1 : 0)
 	
 	const largest3 = sums.slice(0, 3)
-	const total = largest3.reduce((a, b) => a + b, 0)
+		
+	console.log(`3 largest numbers are: ${largest3}`)
 	
-	console.log(`3 largest numbers are: ${sums.slice(0, 3)}`)
-	console.log(`Their sum is: ${total}`)
+	findLargest3Sum(largest3)
 	
 	return largest3
+}
+
+function findLargest3Sum (largest3) {
+	const total = largest3.reduce((a, b) => a + b, 0)
+	
+	console.log(`Sum of 3 largest numbers is: ${total}`)
+	
+	return total
 }
 
 findLargest()
