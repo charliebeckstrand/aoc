@@ -1,4 +1,4 @@
-export default {
+let input = `
 3120
 4127
 1830
@@ -2236,4 +2236,8 @@ export default {
 5186
 5159
 1952
-}
+`
+
+input = input.split('\n\n')
+
+export default { input }

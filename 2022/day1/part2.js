@@ -1,14 +1,12 @@
-import calories from 'calories.js'
+import groups from 'input.js'
 
-const groups = calories.split('\n\n')
 let sums = []
 
 groups.forEach(group => {
-	let trimmed = group.trim()
-	let array = group.split('\n')
+	const array = group.split('\n')
 	
-	const sum = array.map((elt) => {
-		return /^\d+$/.test(elt) ? parseInt(elt) : 0
+	const sum = array.map((el) => {
+		return /^\d+$/.test(el) ? parseInt(el) : 0
 	})
 	.reduce((a, b) => {
 		return a + b
@@ -16,11 +14,6 @@ groups.forEach(group => {
 	
 	sums.push(sum)
 })
-
-function findLargest () {
-	console.log(Math.max(...sums))
-	return Math.max(...sums)
-}
 
 function findLargest3 () {
 	sums.sort((a, b) => a < b ? 1 : a > b ? -1 : 0)
@@ -42,5 +35,4 @@ function findLargest3Sum (largest3) {
 	return total
 }
 
-findLargest()
 findLargest3()
