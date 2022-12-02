@@ -1,4 +1,4 @@
-import rounds from 'input.js'
+const rounds = require('./input')
 
 const conditions = {
 	'A X': 3, 'A Y': 4, 'A Z': 8,

@@ -1,4 +1,4 @@
-import course from 'input.js'
+const course = require('./input')
 
 function calculatePosition () {
 	let x = 0

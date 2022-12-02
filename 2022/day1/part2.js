@@ -1,4 +1,4 @@
-import groups from 'input.js'
+const groups = require('./input')
 
 let sums = []
 

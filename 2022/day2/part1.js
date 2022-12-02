@@ -1,4 +1,4 @@
-import rounds from 'input.js'
+const rounds = require('./input')
 
 const conditions = {
 	tie: ['A X', 'B Y', 'C Z'],

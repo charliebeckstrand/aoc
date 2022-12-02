@@ -1,13 +1,19 @@
-import items from 'input.js'
+const items = require('./input')
 
-let count = 0
+function countCalories () {
+	let count = 0
+		
+	items.forEach((item, index) => {	
+		let prev = index > 0 ? items[index - 1] : null
+		
+		if (item > prev) {
+			count++
+		}
+	})
 	
-items.forEach((item, index) => {	
-	let prev = index > 0 ? array[index - 1] : null
+	console.log(`Calorie count is: ${count}`)
 	
-	if (item > prev) {
-		count++
-	}
-})
+	return count
+}
 
-console.log(count)
+countCalories()
