@@ -9,7 +9,7 @@ const conditions = {
 function getScore () {
 	let score = 0
 	
-	rounds.forEach((round, index) => {
+	rounds.forEach(round => {
 		score += conditions[round]
 	})
 	

@@ -8,7 +8,7 @@ const conditions = {
 function getScore () {
 	let score = 0
 	
-	rounds.forEach((round, index) => {
+	rounds.forEach(round => {
 		if (round.includes('X')) { score++ }
 		if (round.includes('Y')) { score += 2 }
 		if (round.includes('Z')) { score += 3 }
