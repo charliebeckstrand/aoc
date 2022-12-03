@@ -26,7 +26,7 @@ function calcPriority () {
 function calcBadgePriority () {	
 	let sum = 0
 	
-	const groups = setGroup(compartments, 3)
+	const groups = groupCompartments(compartments, 3)
 	
 	groups.forEach(group => {
 		const first = group[0].split('')
@@ -52,16 +52,14 @@ function setPriority () {
 		priority[char] = index + 1 
 	})
 	
-	// convert alphabet array to uppercase
-	alphabet = alphabet.map(char => { return char.toUpperCase() })
+	alphabet = alphabet.map(char => { return char.toUpperCase() }) 	// convert alphabet array to uppercase
 	
 	alphabet.forEach((char, index) => {
-		// point value needs to start at 26 for uppercase characters
-		priority[char] = index + 1 + 26
+		priority[char] = index + 1 + 26 // point value needs to start at 26 for uppercase characters
 	})
 }
 
-function setGroup (array, size) {
+function groupCompartments (array, size) {
 	let group = []
 
 	while(array.length > 0) {
