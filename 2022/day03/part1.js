@@ -3,26 +3,6 @@ const compartments = require('./input')
 let alphabet = 'abcdefghijklmnopqrstuvwxyz'
 let priority = {}
 
-function calcPriority () {
-	let sum = 0
-	
-	compartments.forEach(compartment => {
-		const array = compartment.split('')
-		const half = Math.ceil(array.length / 2) 
-		
-		const firstHalf = array.slice(0, half)
-		const secondHalf = array.slice(half)
-
-		const commonChar = firstHalf.find(char => secondHalf.includes(char))
-		
-		sum += getSum(commonChar)
-	})
-	
-	console.log(`Priority sum is: ${sum}`)
-	
-	return sum
-}
-
 function setPriority () {
 	alphabet = alphabet.split('')
 	
@@ -39,15 +19,28 @@ function setPriority () {
 	})
 }
 
-function getSum (char) {
+setPriority()
+
+function calcPriority () {
 	let sum = 0
 	
-	for (key in priority) {
-		if (key === char) { sum += priority[key] }
-	}
+	compartments.forEach(compartment => {
+		const array = compartment.split('')
+		const half = Math.ceil(array.length / 2) 
+		
+		const firstHalf = array.slice(0, half)
+		const secondHalf = array.slice(half)
 
+		const commonChar = firstHalf.find(char => secondHalf.includes(char))
+		
+		for (key in priority) {
+			if (key === commonChar) { sum += priority[key] }
+		}
+	})
+	
+	console.log(`Priority sum is: ${sum}`)
+	
 	return sum
 }
 
-setPriority()
 calcPriority()
