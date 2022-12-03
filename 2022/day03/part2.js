@@ -27,11 +27,11 @@ function calcBadgePriority () {
 	const groups = groupCompartments(compartments, 3)
 	
 	groups.forEach(group => {
-		const first = group[0].split('')
-		const second = group[1].split('')
-		const third = group[2].split('')
+		const bag1 = group[0].split('')
+		const bag2 = group[1].split('')
+		const bag3 = group[2].split('')
 		
-		let arrays = [first, second, third]
+		let arrays = [bag1, bag2, bag3]
 		
 		let commonCharacters = arrays.reduce((a, b) => a.filter(c => b.includes(c)))
 		
