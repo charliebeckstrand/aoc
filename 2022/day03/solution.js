@@ -3,7 +3,7 @@ const compartments = require('./input')
 let alphabet = 'abcdefghijklmnopqrstuvwxyz'
 let priority = {}
 
-function findCommonLetter () {
+function calcPriority () {
 	let sum = 0
 	
 	compartments.forEach(compartment => {
@@ -18,12 +18,12 @@ function findCommonLetter () {
 		sum += getSum(commonChar)
 	})
 	
-	console.log(`Part 1 sum is: ${sum}`)
+	console.log(`Part 1, priority sum is: ${sum}`)
 	
 	return sum
 }
 
-function findBadgePriority () {	
+function calcBadgePriority () {	
 	let sum = 0
 	
 	const groups = setGroup(compartments, 3)
@@ -33,14 +33,14 @@ function findBadgePriority () {
 		const second = group[1].split('')
 		const third = group[2].split('')
 		
-		let data = [first, second, third]
+		let arrays = [first, second, third]
 		
-		let commonCharacters = data.reduce((a, b) => a.filter(c => b.includes(c)))
+		let commonCharacters = arrays.reduce((a, b) => a.filter(c => b.includes(c)))
 		
 		sum += getSum(commonCharacters[0])
 	})
 	
-	console.log(`Part 2 sum is: ${sum}`)
+	console.log(`Part 2, badge priority sum is: ${sum}`)
 	
 	return sum
 }
@@ -82,5 +82,5 @@ function getSum (char) {
 }
 
 setPriority()
-findCommonLetter()
-findBadgePriority()
+calcPriority()
+calcBadgePriority()
