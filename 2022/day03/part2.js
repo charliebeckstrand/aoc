@@ -31,9 +31,9 @@ function calcBadgePriority () {
 		const bag2 = group[1].split('')
 		const bag3 = group[2].split('')
 		
-		let arrays = [bag1, bag2, bag3]
+		let bags = [bag1, bag2, bag3]
 		
-		let commonCharacters = arrays.reduce((a, b) => a.filter(c => b.includes(c)))
+		let commonCharacters = bags.reduce((a, b) => a.filter(c => b.includes(c)))
 		
 		for (key in priority) {
 			if (key === commonCharacters[0]) { sum += priority[key] }
