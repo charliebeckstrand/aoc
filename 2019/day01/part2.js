@@ -20,8 +20,8 @@ function calcFuel () {
 	return result
 }
 
+calcFuel()
+
 function calculate (input) {
 	return Math.floor(input / 3) - 2
 }
-
-calcFuel()

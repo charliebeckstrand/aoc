@@ -4,7 +4,7 @@ function getOverlap () {
 	let count = 0
 	
 	sections.forEach(section => {		
-		const [range1, range2] = formatSection(section)
+		const [range1, range2] = section.split(',').map(n => n.split('-').map(Number))
 		const [range1start, range1end] = range1
 		const [range2start, range2end] = range2
 		
@@ -22,7 +22,3 @@ function getOverlap () {
 }
 
 getOverlap()
-
-function formatSection (section) {
-	return section.split(',').map(n => n.split('-').map(Number))
-}
