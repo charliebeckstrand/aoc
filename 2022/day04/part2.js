@@ -1,9 +1,5 @@
 let sections = require('./input')
 
-function formatSection (section) {
-	return section.split(',').map(n => n.split('-').map(Number))
-}
-
 function getOverlap () {
 	let count = 0
 	
@@ -26,3 +22,7 @@ function getOverlap () {
 }
 
 getOverlap()
+
+function formatSection (section) {
+	return section.split(',').map(n => n.split('-').map(Number))
+}

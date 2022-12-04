@@ -1,9 +1,5 @@
 let sections = require('./input')
 
-function formatSection (section) {
-	return section.split(',').map(n => n.split('-').map(Number))
-}
-
 function getFullOverlap () {
 	let count = 0
 	
@@ -20,9 +16,13 @@ function getFullOverlap () {
 		}
 	})
 	
-	console.log(`Overlap count is ${count}`)
+	console.log(`Full overlap count is ${count}`)
 	
 	return count
 }
 
 getFullOverlap()
+
+function formatSection (section) {
+	return section.split(',').map(n => n.split('-').map(Number))
+}
