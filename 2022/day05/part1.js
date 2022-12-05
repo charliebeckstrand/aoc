@@ -17,14 +17,10 @@ function setStacks () {
 	
 	moves.forEach(move => {
 		const operations = move.split(' ').map(Number).filter(Number)
-
-		let [amount, from, to] = operations
-		
-		from = from - 1	
-		to = to - 1
+		const [amount, from, to] = operations
 		
 		for (let i = 0; i < amount; i++) {
-			stacks[to].push(stacks[from].pop())
+			stacks[to - 1].push(stacks[from - 1].pop())
 		}
 	})
 	
