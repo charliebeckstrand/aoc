@@ -1,4 +1,4 @@
-let sections = require('./input')
+const sections = require('./input')
 
 function getFullOverlap () {
 	let count = 0
