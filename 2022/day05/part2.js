@@ -1,7 +1,5 @@
 const input = require('./input')
-const moves = input.filter(i => i.startsWith('move'))
-
-let stacks = [
+const stacks = [
 	['W', 'R', 'F'],
 	['T', 'H', 'M', 'C', 'D', 'V', 'W', 'P'],
 	['P', 'M', 'Z', 'N', 'P'],
@@ -12,6 +10,7 @@ let stacks = [
 	['P', 'N', 'R', 'F', 'W', 'T', 'V', 'C'],
 	['J', 'W', 'H', 'G', 'R', 'S', 'V']
 ]
+const moves = input.filter(i => i.startsWith('move'))
 
 function setStacks () {
 	let result = null
