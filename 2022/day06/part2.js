@@ -23,7 +23,7 @@ function findMessageMarker () {
 		}
 	}
 	
-	// If no market is found
+	// If no message marker is found, return null
 	return null
 }
 

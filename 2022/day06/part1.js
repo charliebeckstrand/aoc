@@ -23,7 +23,7 @@ function findMarker () {
 		}
 	}
 	
-	// If no market is found
+	// If no marker is found, return null
 	return null
 }
 
