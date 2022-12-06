@@ -4,7 +4,9 @@ function findMarker () {
 	let checkedCharacters = new Set()
 	let uniqueCharacters = 0
 	
-	input.forEach((char, index) => {
+	for (let i = 0; i < input.length; i++) {
+		const char = input[i]
+		
 		if (!checkedCharacters.has(char)) {
 			checkedCharacters.add(char)
 			
@@ -17,11 +19,12 @@ function findMarker () {
 		}
 		
 		if (uniqueCharacters === 4) {
-			console.log(`Count is: ${index}`)
-			
-			input.length = 0 // end loop
+			return i
 		}
-	})
+	}
+	
+	// If no market is found
+	return null
 }
 
-findMarker()
+console.log(findMarker())

@@ -1,10 +1,12 @@
 const input = require('./input')
 
 function findMessageMarker () {
-	let uniqueCharacters = 0
 	let checkedCharacters = new Set()
+	let uniqueCharacters = 0
 	
-	input.forEach((char, index) => {
+	for (let i = 0; i < input.length; i++) {
+		const char = input[i]
+		
 		if (!checkedCharacters.has(char)) {
 			checkedCharacters.add(char)
 			
@@ -17,11 +19,13 @@ function findMessageMarker () {
 		}
 		
 		if (uniqueCharacters === 14) {
-			console.log(`Count is: ${index + 1}`)
-
-			input.length = 0 // end loop
+			return i + 1
 		}
-	})
+	}
+	
+	// If no market is found
+	return null
 }
 
-findMessageMarker()
+console.log(findMessageMarker())
+
