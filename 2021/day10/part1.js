@@ -37,13 +37,13 @@ function findCorruptedChunk (line) {
 	return null
 }
 
-function mapKeysIncludesCharacter(map, character) {
+function mapKeysIncludesCharacter (map, character) {
 	const values = Array.from(map.keys())
 	
 	return values.includes(character)
 }
 
-function mapValuesIncludes(map, char) {
+function mapValuesIncludes (map, char) {
 	const values = Array.from(map.values())
 	
 	return values.includes(char)
