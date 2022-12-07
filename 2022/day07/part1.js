@@ -4,20 +4,18 @@ function createDirectoryMap () {
 	const map = {}
 	const paths = []
 	
-	lines.forEach(line => {
-		let currentDir = map
-		
-		if (/\d+\s\w+/.test(line)) {			
-			const directoryPath = []
-			
+	lines.forEach(line => {		
+		if (/\d+\s\w+/.test(line)) {						
 			const totalSize = Number(line.match(/\d+/)[0])
 			
+			const currentDirPaths = []
+			
 			paths.forEach(path => {
-				directoryPath.push(path)
+				currentDirPaths.push(path)
 				
-				const dirSize = map[directoryPath.join('/')] ?? 0
+				const dirSize = map[currentDirPaths.join('/')] ?? 0
 				
-				map[directoryPath.join('/')] = dirSize + totalSize
+				map[currentDirPaths.join('/')] = dirSize + totalSize
 			})
 		}
 		else if (/\$ cd/.test(line)) {
