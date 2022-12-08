@@ -15,10 +15,10 @@ function getOverlap () {
 			count++
 		}
 	})
-	
-	console.log(`Overlap count is ${count}`)
-	
+		
 	return count
 }
 
-getOverlap()
+const count = getOverlap()
+
+console.log(count)

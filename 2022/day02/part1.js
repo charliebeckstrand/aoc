@@ -16,10 +16,10 @@ function getScore () {
 		if (conditions.tie.includes(round)) { score += 3 }
 		if (conditions.win.includes(round)) { score += 6 }
 	})
-	
-	console.log(`Score: ${score}`)
-	
+		
 	return score
 }
 
-getScore()
+const score = getScore()
+
+console.log(score)

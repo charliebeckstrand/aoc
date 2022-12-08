@@ -27,4 +27,6 @@ function findMarker () {
 	return null
 }
 
-console.log(findMarker())
+const marker = findMarker()
+
+console.log(marker)

@@ -39,13 +39,13 @@ function calcBadgePriority () {
 			if (key === commonCharacters[0]) { sum += priority[key] }
 		}
 	})
-	
-	console.log(`Badge priority sum is: ${sum}`)
-	
+		
 	return sum
 }
 
-calcBadgePriority()
+const sum = calcBadgePriority()
+
+console.log(sum)
 
 function groupCompartments (array, size) {
 	let group = []

@@ -12,10 +12,10 @@ function getScore () {
 	rounds.forEach(round => {
 		score += conditions[round]
 	})
-	
-	console.log(`Score: ${score}`)
-	
+		
 	return score
 }
 
-getScore()
+const score = getScore()
+
+console.log(score)

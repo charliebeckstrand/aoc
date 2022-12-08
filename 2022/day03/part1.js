@@ -38,9 +38,9 @@ function calcPriority () {
 		}
 	})
 	
-	console.log(`Priority sum is: ${sum}`)
-	
 	return sum
 }
 
-calcPriority()
+const sum = calcPriority()
+
+console.log(sum)

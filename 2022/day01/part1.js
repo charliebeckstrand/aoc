@@ -17,10 +17,10 @@ groups.forEach(group => {
 
 function findLargest () {
 	const largest  = Math.max(...sums)
-	
-	console.log(`Larest number is ${largest}`)
-	
+		
 	return largest
 }
 
-findLargest()
+const largestNumber = findLargest()
+
+console.log(largestNumber)

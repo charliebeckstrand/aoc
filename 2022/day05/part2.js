@@ -25,7 +25,7 @@ function setStacks () {
 	
 	result = stacks.map(stack => stack[stack.length - 1]).join('')
 	
-	console.log(`Result is: ${result}`)	
+	return result
 }
 
-setStacks()
+console.log(setStacks())

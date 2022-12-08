@@ -15,10 +15,10 @@ function getFullOverlap () {
 			count++
 		}
 	})
-	
-	console.log(`Full overlap count is ${count}`)
-	
+		
 	return count
 }
 
-getFullOverlap()
+const count = getFullOverlap()
+
+console.log(count)

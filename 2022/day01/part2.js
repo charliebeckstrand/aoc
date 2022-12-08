@@ -20,8 +20,6 @@ function findLargest3 () {
 	
 	const largest3 = sums.slice(0, 3)
 		
-	console.log(`3 largest numbers are: ${largest3}`)
-	
 	findLargest3Sum(largest3)
 	
 	return largest3
@@ -29,10 +27,10 @@ function findLargest3 () {
 
 function findLargest3Sum (largest3) {
 	const total = largest3.reduce((a, b) => a + b, 0)
-	
-	console.log(`Sum of 3 largest numbers is: ${total}`)
-	
+		
 	return total
 }
 
-findLargest3()
+const sum = findLargest3Sum(findLargest3())
+
+console.log(sum)

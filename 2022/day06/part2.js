@@ -27,5 +27,7 @@ function findMessageMarker () {
 	return null
 }
 
-console.log(findMessageMarker())
+const messageMarker = findMessageMarker()
+
+console.log(messageMarker)
 
