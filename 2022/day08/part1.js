@@ -3,9 +3,9 @@ const grid = require('./input')
 function countVisibleTrees () {
 	let count = 0
 		
-	for (let i = 0; i < grid.length; i++) {		
-		for (let j = 0; j < grid[i].length; j++) {
-			if (visible(i, j).includes(true)) { count++ }
+	for (let y = 0; y < grid.length; y++) {		
+		for (let x = 0; x < grid[y].length; x++) {
+			if (visible(y, x).includes(true)) { count++ }
 		}
 	}
 	
@@ -16,41 +16,41 @@ const count = countVisibleTrees()
 
 console.log(count)
 
-function visible (i, j) {
+function visible (y, x) {
 	let [edge, up, down, left, right] = [true, true, true, true, true]
 	
 	if (
-		i !== 0 || 
-		j !== 0 || 
-		i !== grid.length - 1 ||
-		j !== grid[i].length - 1
+		y !== 0 ||
+		x !== 0 ||
+		y !== grid.length - 1 ||
+		x !== grid[y].length - 1
 	) {
 		edge = false
 	}
 	
-	for (let k = 0; k < j; k++) {
-		if (grid[k][i] >= grid[j][i]) {
+	for (let i = 0; i < x; i++) {
+		if (grid[i][y] >= grid[x][y]) {
 			up = false
 			break
 		}
 	}
 	
-	for (let k = grid.length - 1; k > j; k--) {
-		if (grid[k][i] >= grid[j][i]) {
+	for (let i = grid.length - 1; i > x; i--) {
+		if (grid[i][y] >= grid[x][y]) {
 			down = false
 			break
 		}
 	}
 	
-	for (let k = 0; k < i; k++) {
-		if (grid[j][k] >= grid[j][i]) {
+	for (let i = 0; i < y; i++) {
+		if (grid[x][i] >= grid[x][y]) {
 			left = false
 			break
 		}
 	}
 	
-	for (let k = grid.length - 1; k > i; k--) {
-		if (grid[j][k] >= grid[j][i]) {
+	for (let i = grid.length - 1; i > y; i--) {
+		if (grid[x][i] >= grid[x][y]) {
 			right = false
 			break
 		}
