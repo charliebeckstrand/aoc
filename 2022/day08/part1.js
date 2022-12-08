@@ -28,9 +28,10 @@ function visibleEdge (grid, i, j) {
 	let visible = true
 	
 	if (
-		i !== 0 || j !== 0 || 
-		j !== grid[i].length - 1 || 
-		i !== grid.length - 1
+		i !== 0 || 
+		j !== 0 || 
+		i !== grid.length - 1 ||
+		j !== grid[i].length - 1
 	) {
 		visible = false
 	}
