@@ -28,10 +28,10 @@ function createDirectoryMap () {
 	return map
 }
 
-function findSmallestDirectoryToRemove (directoryMap) {
-	return Object.values(directoryMap).sort((a, b) => a - b).find((size) => 70000000 - directoryMap['/'] + size >= 30000000)
-}
-
 const directoryMap = createDirectoryMap()
 
 console.log(findSmallestDirectoryToRemove(directoryMap))
+
+function findSmallestDirectoryToRemove (directoryMap) {
+	return Object.values(directoryMap).sort((a, b) => a - b).find((size) => 70000000 - directoryMap['/'] + size >= 30000000)
+}

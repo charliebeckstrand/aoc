@@ -28,10 +28,10 @@ function createDirectoryMap () {
 	return map
 }
 
-function getTotalSize (directoryMap) {
-	return Object.values(directoryMap).reduce((total, size) => (size <= 100000 ? total + size : total), 0)
-}
-
 const directoryMap = createDirectoryMap()
 
 console.log(getTotalSize(directoryMap))
+
+function getTotalSize (directoryMap) {
+	return Object.values(directoryMap).reduce((total, size) => (size <= 100000 ? total + size : total), 0)
+}
