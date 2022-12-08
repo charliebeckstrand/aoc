@@ -1,4 +1,17 @@
 const input = require('./input')
+
+function gridToArray (grid) {
+	const rows = grid.split('\n')
+	const result = []
+	
+	for (let i = 0; i < rows.length; i++) {
+		const row = rows[i].split('')
+		result.push(row)
+	}
+	
+	return result
+}
+
 const grid = gridToArray(input)
 
 function countVisibleTrees () {
@@ -58,16 +71,4 @@ function visible (y, x) {
 	}
 	
 	return [edge, up, down, left, right]
-}
-
-function gridToArray (grid) {
-	const rows = grid.split('\n')
-	const result = []
-	
-	for (let i = 0; i < rows.length; i++) {
-		const row = rows[i].split('')
-		result.push(row)
-	}
-	
-	return result
 }

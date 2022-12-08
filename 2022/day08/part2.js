@@ -1,4 +1,17 @@
 const input = require('./input')
+
+function gridToArray (grid) {
+	const rows = grid.split('\n')
+	const result = []
+	
+	for (let i = 0; i < rows.length; i++) {
+		const row = rows[i].split('')
+		result.push(row)
+	}
+	
+	return result
+}
+
 const grid = gridToArray(input)
 
 function getHighestPoint () {
@@ -8,7 +21,8 @@ function getHighestPoint () {
 		for (let x = 0; x < grid[y].length; x++) {
 			const [up, down, left, right] = vantagePoints(y, x)
 			
-			let score = up * down * left * right
+			const score = up * down * left * right
+			
 			result = Math.max(score, result)
 		}
 	}
@@ -44,16 +58,4 @@ function vantagePoints (y, x) {
 	}
 	
 	return [up, down, left, right]
-}
-
-function gridToArray (grid) {
-	const rows = grid.split('\n')
-	const result = []
-	
-	for (let i = 0; i < rows.length; i++) {
-		const row = rows[i].split('')
-		result.push(row)
-	}
-	
-	return result
 }
