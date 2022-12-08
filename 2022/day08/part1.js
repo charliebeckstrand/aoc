@@ -4,20 +4,16 @@ function countVisibleTrees (grid) {
 	let count = 0
 		
 	for (let i = 0; i < grid.length; i++) {		
-		for (let j = 0; j < grid[i].length; j++) {
-			if (i == 0 || j == 0 || j == grid[i].length - 1 || i == grid.length - 1) {
-				count++
-				continue
-			}
+		for (let j = 0; j < grid[i].length; j++) {			
+			let [edge, up, down, left, right] = [true, true, true, true, true]
 			
-			let [up, down, left, right] = [true, true, true, true]
-			
+			edge = visibleEdge(grid, i, j)
 			up = visibleFromUp(grid, i, j)
 			down = visibleFromDown(grid, i, j)
 			left = visibleFromLeft(grid, i, j)
 			right = visibleFromRight(grid, i, j)
 			
-			if ([up, down, left, right].includes(true)) { count++ }
+			if ([edge, up, down, left, right].includes(true)) { count++ }
 		}
 	}
 	
@@ -27,6 +23,16 @@ function countVisibleTrees (grid) {
 const count = countVisibleTrees(grid)
 
 console.log(count)
+
+function visibleEdge (grid, i, j) {
+	let visible = false
+	
+	if (i == 0 || j == 0 || j == grid[i].length - 1 || i == grid.length - 1) {
+		visible = true
+	}
+	
+	return visible
+}
 
 function visibleFromUp (grid, i, j) {
 	let visible = true
