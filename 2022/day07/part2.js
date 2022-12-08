@@ -7,7 +7,6 @@ function createDirectoryMap () {
 	lines.forEach(line => {		
 		if (/\d+\s\w+/.test(line)) {						
 			const totalSize = Number(line.match(/\d+/)[0])
-			
 			const currentDirPaths = []
 			
 			paths.forEach(path => {
