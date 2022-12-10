@@ -1,6 +1,6 @@
 const instructions = require('./input')
 
-function execute () {	
+function getSignalStrength () {	
 	let cycle = 0
 	let x = 1
 	
@@ -25,6 +25,6 @@ function execute () {
 	return signal
 }
 
-const signal = execute()
+const signal = getSignalStrength()
 
 console.log(signal)
