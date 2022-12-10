@@ -4,22 +4,22 @@ function getSignalStrength () {
 	let cycle = 0
 	let x = 1
 	
-	let signal = instructions.reduce((signal, instruction) => {
+	let signal = instructions.reduce((accumulator, instruction) => {
 		let [type, number] = instruction.split(' ')
 		
 		cycle++
 		
-		if (cycle % 40 == 20) { signal += cycle * x }
+		if (cycle % 40 == 20) { accumulator += cycle * x }
 		
 		if (type == 'addx') {
 			cycle++
 			
-			if (cycle % 40 == 20) { signal += cycle * x }
+			if (cycle % 40 == 20) { accumulator += cycle * x }
 			
 			x += Number(number)
 		}
 		
-		return signal
+		return accumulator
 	}, 0)
 	
 	return signal
