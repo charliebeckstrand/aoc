@@ -5,7 +5,7 @@ function renderImage () {
 	let sprite = 1
 	let image = '\n'
 	
-	let drawPixel = (instruction, number) => {
+	let drawPixel = () => {
 		let position = cycle % 40
 		
 		image += (Math.abs(position - sprite) <= 1) ? '█' : ' '
@@ -13,17 +13,17 @@ function renderImage () {
 		cycle++
 		
 		if (cycle % 40 == 0) { image += '\n' }
-		
-		if (instruction == 'addx') {
-			drawPixel()
-			sprite += parseInt(number)
-		}
 	}
 	
 	instructions.forEach(line => {
 		let [instruction, number] = line.split(' ')
 		
-		drawPixel(instruction, number)
+		drawPixel()
+		
+		if (instruction == 'addx') {
+			drawPixel()
+			sprite += parseInt(number)
+		}
 	})
 	
 	return image
