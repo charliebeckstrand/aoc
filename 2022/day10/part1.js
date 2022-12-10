@@ -4,7 +4,7 @@ function getSignalStrength () {
 	let cycle = 0
 	let x = 1
 	
-	let signal = instructions.reduce((accumulator, instruction) => {
+	return instructions.reduce((accumulator, instruction) => {
 		let [type, number] = instruction.split(' ')
 		
 		cycle++
@@ -21,8 +21,6 @@ function getSignalStrength () {
 		
 		return accumulator
 	}, 0)
-	
-	return signal
 }
 
 const signal = getSignalStrength()
