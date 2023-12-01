@@ -3,15 +3,15 @@ const items = require('./input')
 const getNumbers = (item) => {
     // create an object with number words as keys and their corresponding numbers as values
     const numberWords = {
-        one: 1,
-        two: 2,
-        three: 3,
-        four: 4,
-        five: 5,
-        six: 6,
-        seven: 7,
-        eight: 8,
-        nine: 9
+        nine: '9',
+        eight: '8',
+        seven: '7',
+        six: '6',
+        five: '5',
+        four: '4',
+        three: '3',
+        two: '2',
+        one: '1'
     }
 
     let matches = []

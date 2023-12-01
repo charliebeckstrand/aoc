@@ -7,7 +7,7 @@ const getNumber = (chars, reverse) => {
     return chars.find((char) => !isNaN(char)) || 0
 }
 
-const concatNumbers = (item) => {
+const getNumbers = (item) => {
     // split the string into an array of characters
     const chars = item.split('')
 
@@ -19,6 +19,6 @@ const concatNumbers = (item) => {
 }
 
 // reduce the array of items to a single value
-const total = items.reduce((acc, item) => acc + concatNumbers(item), 0)
+const total = items.reduce((acc, item) => acc + getNumbers(item), 0)
 
 console.log(`Total sum is: ${total}`)
