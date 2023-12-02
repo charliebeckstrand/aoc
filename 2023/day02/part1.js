@@ -1,10 +1,12 @@
-const items = require('./input')
+const games = require('./input')
 
-const getPossibleGames = (item) => {
-    // Split the item into id and draws
-    const [id, draws] = item.replace('Game ', '').split(':')
+const getPossibleGames = (game) => {
+    // create an object with available cubes as keys and their corresponding limits as values
+    const availableCubes = { red: 12, green: 13, blue: 14 }
 
-    // Split the draws into sets
+    const [id, draws] = game.replace('Game ', '').split(':')
+
+    // split the string into an array of sets
     const sets = draws.split(';').map((set) =>
         set
             .trim()
@@ -15,12 +17,9 @@ const getPossibleGames = (item) => {
             })
     )
 
-    // Criteria for draws in a set to be possible
-    const criteria = { red: 12, green: 13, blue: 14 }
-
-    // Check if all sets meet the criteria
+    // check if the amount of cubes in each set is less than or equal to the limit
     return sets.every((set) =>
-        Object.entries(criteria).every(
+        Object.entries(availableCubes).every(
             ([color, limit]) =>
                 set.filter((group) => group.color === color).reduce((acc, group) => acc + group.amount, 0) <= limit
         )
@@ -29,6 +28,6 @@ const getPossibleGames = (item) => {
         : 0
 }
 
-const result = items.map((item) => getPossibleGames(item)).reduce((acc, item) => acc + item, 0)
+const result = games.map((game) => getPossibleGames(game)).reduce((acc, game) => acc + game, 0)
 
 console.log(`result: ${result}`)

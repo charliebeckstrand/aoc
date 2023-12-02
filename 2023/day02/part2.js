@@ -1,8 +1,8 @@
-const items = require('./input')
+const games = require('./input')
 
-const getPowerOfRequiredCubes = (item) => {
-    // Split the item so we can get the sets
-    const sets = item
+const getPowerOfCubes = (game) => {
+    // split the string into an array of sets
+    const sets = game
         .split(':')[1]
         .split(';')
         .map((set) =>
@@ -15,7 +15,7 @@ const getPowerOfRequiredCubes = (item) => {
                 })
         )
 
-    // get the minimum required cubes for each color
+    // create an object with available cubes as keys and their corresponding limits as values
     const cubes = sets.reduce((acc, set) => {
         set.forEach((group) => {
             if (!acc[group.color] || acc[group.color] < group.amount) {
@@ -26,10 +26,10 @@ const getPowerOfRequiredCubes = (item) => {
         return acc
     }, {})
 
-    // return the power of the minimum required cubes
+    // return the product of the values in the cubes object
     return Object.values(cubes).reduce((acc, amount) => acc * amount, 1)
 }
 
-const result = items.map((item) => getPowerOfRequiredCubes(item)).reduce((acc, item) => acc + item, 0)
+const result = games.map((game) => getPowerOfCubes(game)).reduce((acc, game) => acc + game, 0)
 
 console.log(`result: ${result}`)
