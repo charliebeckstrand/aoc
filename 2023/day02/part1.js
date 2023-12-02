@@ -4,7 +4,7 @@ const getPossibleGames = (game) => {
     // available cubes of each color
     const availableCubes = { red: 12, green: 13, blue: 14 }
 
-    // separate the game id and the draws
+    // get the game id and draws
     const [id, draws] = game.replace('Game ', '').split(':')
 
     // split the game into an array of sets
