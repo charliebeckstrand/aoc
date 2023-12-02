@@ -1,6 +1,6 @@
 const items = require('./input')
 
-const findGames = (item) => {
+const getPowerOfRequiredCubes = (item) => {
     // Split the item so we can get the sets
     const sets = item
         .split(':')[1]
@@ -30,6 +30,6 @@ const findGames = (item) => {
     return Object.values(cubes).reduce((acc, amount) => acc * amount, 1)
 }
 
-const result = items.map((item) => findGames(item)).reduce((acc, item) => acc + item, 0)
+const result = items.map((item) => getPowerOfRequiredCubes(item)).reduce((acc, item) => acc + item, 0)
 
 console.log(`result: ${result}`)

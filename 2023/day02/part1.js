@@ -1,6 +1,6 @@
 const items = require('./input')
 
-const findGames = (item) => {
+const getPossibleGames = (item) => {
     // Split the item into id and draws
     const [id, draws] = item.replace('Game ', '').split(':')
 
@@ -29,6 +29,6 @@ const findGames = (item) => {
         : 0
 }
 
-const result = items.map((item) => findGames(item)).reduce((acc, item) => acc + item, 0)
+const result = items.map((item) => getPossibleGames(item)).reduce((acc, item) => acc + item, 0)
 
 console.log(`result: ${result}`)
