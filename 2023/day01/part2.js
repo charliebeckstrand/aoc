@@ -1,7 +1,7 @@
 const items = require('./input')
 
 const getNumbers = (item) => {
-    // create an object with number words as keys and their corresponding numbers as values
+    // map of number words to numbers
     const numberWords = {
         nine: '9',
         eight: '8',

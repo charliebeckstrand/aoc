@@ -1,7 +1,7 @@
 const games = require('./input')
 
 const getPowerOfCubes = (game) => {
-    // split the string into an array of sets
+    // split the game into an array of sets
     const sets = game
         .split(':')[1]
         .split(';')
@@ -15,7 +15,7 @@ const getPowerOfCubes = (game) => {
                 })
         )
 
-    // create an object with available cubes as keys and their corresponding limits as values
+    // get the max amount of cubes of each color
     const cubes = sets.reduce((acc, set) => {
         set.forEach((group) => {
             if (!acc[group.color] || acc[group.color] < group.amount) {
@@ -26,7 +26,7 @@ const getPowerOfCubes = (game) => {
         return acc
     }, {})
 
-    // return the product of the values in the cubes object
+    // return the product of the cubes
     return Object.values(cubes).reduce((acc, amount) => acc * amount, 1)
 }
 

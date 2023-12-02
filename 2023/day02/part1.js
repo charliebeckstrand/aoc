@@ -1,12 +1,13 @@
 const games = require('./input')
 
 const getPossibleGames = (game) => {
-    // create an object with available cubes as keys and their corresponding limits as values
+    // available cubes for each color
     const availableCubes = { red: 12, green: 13, blue: 14 }
 
+    // separate the game id and the draws
     const [id, draws] = game.replace('Game ', '').split(':')
 
-    // split the string into an array of sets
+    // split the game into an array of sets
     const sets = draws.split(';').map((set) =>
         set
             .trim()
