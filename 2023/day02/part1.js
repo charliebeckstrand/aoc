@@ -1,7 +1,7 @@
 const games = require('./input')
 
 const getPossibleGames = (game) => {
-    // available cubes for each color
+    // available cubes of each color
     const availableCubes = { red: 12, green: 13, blue: 14 }
 
     // separate the game id and the draws
