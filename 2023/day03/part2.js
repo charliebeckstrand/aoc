@@ -11,6 +11,7 @@ const sumGearRatios = (schematic) => {
 
             for (let x = 0; x < schematic[y].length; x++) {
                 const char = schematic[y][x]
+
                 if (char >= '0' && char <= '9') {
                     if (currentNumber.length === 0) {
                         numberStartX = x // Start of a new number
@@ -48,6 +49,7 @@ const sumGearRatios = (schematic) => {
         for (let y = 0; y < schematic.length; y++) {
             for (let x = 0; x < schematic[y].length; x++) {
                 const char = schematic[y][x]
+
                 if (char === '*') {
                     gearSymbolsMap.push({
                         coordinates: { x, y }
@@ -64,7 +66,7 @@ const sumGearRatios = (schematic) => {
         const gears = []
 
         for (const gearSymbol of gearSymbolsMap) {
-            let numbersAdjacent = []
+            let adjacentNumbers = []
             let product = 1
 
             for (const number of numbersMap) {
@@ -83,7 +85,7 @@ const sumGearRatios = (schematic) => {
                         (x === gearSymbolX - 1 && gearSymbolY === startCoordinates.y + 1) || // bottom left
                         (x === gearSymbolX + 1 && gearSymbolY === startCoordinates.y + 1) // bottom right
                     ) {
-                        numbersAdjacent.push(number.number)
+                        adjacentNumbers.push(number.number)
                         product *= number.number
 
                         break
@@ -92,10 +94,9 @@ const sumGearRatios = (schematic) => {
             }
 
             // If the gear symbol is adjacent to exactly two numbers, add it to the list of gears
-            if (numbersAdjacent.length === 2) {
+            if (adjacentNumbers.length === 2) {
                 gears.push({
-                    coordinates: gearSymbol.coordinates,
-                    numbers: numbersAdjacent,
+                    numbers: adjacentNumbers,
                     product
                 })
             }
@@ -105,10 +106,7 @@ const sumGearRatios = (schematic) => {
     }
 
     // Sum the product of each gear
-    return findGears(mapNumbers(), mapGearSymbols()).reduce(
-        (acc, multipliedNumber) => acc + multipliedNumber.product,
-        0
-    )
+    return findGears(mapNumbers(), mapGearSymbols()).reduce((acc, gear) => acc + gear.product, 0)
 }
 
 const result = sumGearRatios(schematic)
