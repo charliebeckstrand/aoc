@@ -1,7 +1,7 @@
 const schematic = require('./input')
 
 const sumGearRatios = (schematic) => {
-    // Map the numbers in the schematic to their coordinates
+    // Map the numbers in the engine schematic to their coordinates
     const mapNumbers = () => {
         const numbersMap = []
 
@@ -41,7 +41,7 @@ const sumGearRatios = (schematic) => {
         return numbersMap
     }
 
-    // Map the gear symbols in the schematic to their coordinates
+    // Map the gear symbols in the engine schematic to their coordinates
     const mapGearSymbols = () => {
         const gearSymbolsMap = []
 
