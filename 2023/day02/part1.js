@@ -31,4 +31,4 @@ const getPossibleGames = (game) => {
 
 const result = games.map((game) => getPossibleGames(game)).reduce((acc, game) => acc + game, 0)
 
-console.log(`result: ${result}`)
+console.log(result)

@@ -16,13 +16,13 @@ function renderImage () {
 	}
 	
 	instructions.forEach(line => {
-		let [instruction, number] = line.split(' ')
+		let [instruction, amount] = line.split(' ')
 		
 		drawPixel()
 		
 		if (instruction == 'addx') {
 			drawPixel()
-			sprite += parseInt(number)
+			sprite += Number(amount)
 		}
 	})
 	

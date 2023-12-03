@@ -32,4 +32,4 @@ const getPowerOfCubes = (game) => {
 
 const result = games.map((game) => getPowerOfCubes(game)).reduce((acc, game) => acc + game, 0)
 
-console.log(`result: ${result}`)
+console.log(result)

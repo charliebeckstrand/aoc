@@ -67,4 +67,4 @@ const sumPartNumbers = (schematic) => {
 
 const result = sumPartNumbers(schematic)
 
-console.log(`result: ${result}`)
+console.log(result)

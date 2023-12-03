@@ -5,7 +5,7 @@ function getSignalStrength () {
 	let x = 1
 	
 	return instructions.reduce((accumulator, instruction) => {
-		let [type, number] = instruction.split(' ')
+		let [type, amount] = instruction.split(' ')
 		
 		cycle++
 		
@@ -16,7 +16,7 @@ function getSignalStrength () {
 			
 			if (cycle % 40 == 20) { accumulator += cycle * x }
 			
-			x += Number(number)
+			x += Number(amount)
 		}
 		
 		return accumulator

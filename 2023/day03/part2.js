@@ -113,4 +113,4 @@ const sumGearRatios = (schematic) => {
 
 const result = sumGearRatios(schematic)
 
-console.log(`result: ${result}`)
+console.log(result)
