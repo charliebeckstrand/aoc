@@ -105,7 +105,7 @@ const sumGearRatios = (schematic) => {
         return gears
     }
 
-    // Sum the product of each gear
+    // Sum the products of all gears
     return findGears(mapNumbers(), mapGearSymbols()).reduce((acc, gear) => acc + gear.product, 0)
 }
 
