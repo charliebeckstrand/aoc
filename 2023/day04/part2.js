@@ -21,8 +21,10 @@ const processScratchcards = () => {
 
         if (currentCount > 0) {
             const matchCount = cards[i].numbers.filter((number) => cards[i].winningNumbers.includes(number)).length
+
             for (let j = 1; j <= matchCount; j++) {
                 const nextCardIndex = i + j
+
                 if (nextCardIndex < cards.length) {
                     cardCounts[nextCardIndex] += currentCount
                 }
