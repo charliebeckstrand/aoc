@@ -60,14 +60,11 @@ const convertThroughCategories = (seed, categories) => {
 const findLowestLocationNumber = (data) => {
     const seeds = data['seeds']
 
-    // set the lowest location to the highest possible number
     let lowestLocation = Number.MAX_SAFE_INTEGER
 
     seeds.forEach((seed) => {
-        // convert the seed through each category
         const locationNumber = convertThroughCategories(seed, data['categories'])
 
-        // if the location number is lower than the current lowest, then update the lowest
         if (locationNumber < lowestLocation) {
             lowestLocation = locationNumber
         }
