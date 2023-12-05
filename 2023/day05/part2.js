@@ -22,8 +22,8 @@ const processCategory = (section) => {
     return { title, mapping }
 }
 
-const processAlmanac = (almanac) => {
-    const sections = almanac.split('\n\n')
+const processInput = (input) => {
+    const sections = input.split('\n\n')
 
     return sections.reduce((acc, section) => {
         if (section.startsWith('seeds:')) {
@@ -101,7 +101,7 @@ const findLowestLocationNumber = (almanac) => {
 }
 
 const input = require('./input')
-const almanac = processAlmanac(input)
+const almanac = processInput(input)
 const result = findLowestLocationNumber(almanac)
 
 console.log(result)
