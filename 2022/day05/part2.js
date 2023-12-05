@@ -1,31 +1,33 @@
-const input = require('./input')
 const stacks = [
-	['W', 'R', 'F'],
-	['T', 'H', 'M', 'C', 'D', 'V', 'W', 'P'],
-	['P', 'M', 'Z', 'N', 'P'],
-	['J', 'C', 'H', 'R'],
-	['C', 'P', 'G', 'H', 'Q', 'T', 'B'],
-	['G', 'C', 'W', 'L', 'F', 'Z'],
-	['W', 'V', 'L', 'Q', 'Z', 'J', 'G', 'C'],
-	['P', 'N', 'R', 'F', 'W', 'T', 'V', 'C'],
-	['J', 'W', 'H', 'G', 'R', 'S', 'V']
+    ['W', 'R', 'F'],
+    ['T', 'H', 'M', 'C', 'D', 'V', 'W', 'P'],
+    ['P', 'M', 'Z', 'N', 'P'],
+    ['J', 'C', 'H', 'R'],
+    ['C', 'P', 'G', 'H', 'Q', 'T', 'B'],
+    ['G', 'C', 'W', 'L', 'F', 'Z'],
+    ['W', 'V', 'L', 'Q', 'Z', 'J', 'G', 'C'],
+    ['P', 'N', 'R', 'F', 'W', 'T', 'V', 'C'],
+    ['J', 'W', 'H', 'G', 'R', 'S', 'V']
 ]
-const moves = input.filter(i => i.startsWith('move'))
 
-function setStacks () {
-	let result = null
-	
-	moves.forEach(move => {
-		const operations = move.split(' ').map(Number).filter(Number)
-		const [amount, from, to] = operations
-		
-		stacks[to - 1].push(...stacks[from - 1].slice(-amount))
-		stacks[from - 1].length -= amount
-	})
-	
-	result = stacks.map(stack => stack[stack.length - 1]).join('')
-	
-	return result
+function setStacks() {
+    let result = null
+
+    moves.forEach((move) => {
+        const operations = move.split(' ').map(Number).filter(Number)
+        const [amount, from, to] = operations
+
+        stacks[to - 1].push(...stacks[from - 1].slice(-amount))
+        stacks[from - 1].length -= amount
+    })
+
+    result = stacks.map((stack) => stack[stack.length - 1]).join('')
+
+    return result
 }
 
-console.log(setStacks())
+const input = require('./input')
+const moves = input.filter((i) => i.startsWith('move'))
+const result = setStacks(moves)
+
+console.log(result)

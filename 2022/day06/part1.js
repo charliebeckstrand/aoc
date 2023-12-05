@@ -1,32 +1,30 @@
-const input = require('./input')
+function findMarker(input) {
+    let checkedCharacters = new Set()
+    let uniqueCharacters = 0
 
-function findMarker () {
-	let checkedCharacters = new Set()
-	let uniqueCharacters = 0
-	
-	for (let i = 0; i < input.length; i++) {
-		const char = input[i]
-		
-		if (!checkedCharacters.has(char)) {
-			checkedCharacters.add(char)
-			
-			uniqueCharacters++
-		} else {
-			checkedCharacters.clear()
-			checkedCharacters.add(char)
-			
-			uniqueCharacters = 1
-		}
-		
-		if (uniqueCharacters === 4) {
-			return i
-		}
-	}
-	
-	// If no marker is found, return null
-	return null
+    for (let i = 0; i < input.length; i++) {
+        const char = input[i]
+
+        if (!checkedCharacters.has(char)) {
+            checkedCharacters.add(char)
+
+            uniqueCharacters++
+        } else {
+            checkedCharacters.clear()
+            checkedCharacters.add(char)
+
+            uniqueCharacters = 1
+        }
+
+        if (uniqueCharacters === 4) {
+            return i
+        }
+    }
+
+    return null
 }
 
-const marker = findMarker()
+const input = require('./input')
+const result = findMarker(input)
 
-console.log(marker)
+console.log(result)

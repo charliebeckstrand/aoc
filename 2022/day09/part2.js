@@ -1,5 +1,3 @@
-const moves = require('./input')
-
 const knots = Array.from({ length: 10 }, () => ({ x: 0, y: 0 }))
 const visited = new Set(['0,0'])
 
@@ -13,7 +11,7 @@ const updateKnotPositions = () => {
             knots[i].y += Math.sign(dy)
         }
     }
-    // Record the new position of the tail
+
     const tail = knots[knots.length - 1]
 
     visited.add(`${tail.x},${tail.y}`)
@@ -21,7 +19,6 @@ const updateKnotPositions = () => {
 
 const moveHead = (direction, steps) => {
     for (let i = 0; i < steps; i++) {
-        // Move the head
         switch (direction) {
             case 'R':
                 knots[0].x++
@@ -37,7 +34,6 @@ const moveHead = (direction, steps) => {
                 break
         }
 
-        // Update positions of the remaining knots
         updateKnotPositions()
     }
 }
@@ -45,13 +41,14 @@ const moveHead = (direction, steps) => {
 const executeMoves = (moves) => {
     moves.forEach((move) => {
         const [direction, steps] = move.split(' ')
+
         moveHead(direction, parseInt(steps))
     })
 
-    // Return the number of unique positions visited by the tail
     return visited.size
 }
 
-const uniquePositions = executeMoves(moves)
+const moves = require('./input')
+const result = executeMoves(moves)
 
-console.log(uniquePositions)
+console.log(result)
