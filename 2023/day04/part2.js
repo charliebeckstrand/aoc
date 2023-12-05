@@ -1,6 +1,4 @@
-const input = require('./input')
-
-const processScratchcards = () => {
+const processScratchcards = (input) => {
     const cards = input.map((card) => {
         const [winningNumbers, numbers] = card
             .substring(card.indexOf(':') + 1)
@@ -36,6 +34,7 @@ const processScratchcards = () => {
     return totalCards
 }
 
-const result = processScratchcards()
+const input = require('./input')
+const result = processScratchcards(input)
 
 console.log(result)

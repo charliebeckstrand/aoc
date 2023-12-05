@@ -1,5 +1,3 @@
-const schematic = require('./input')
-
 const sumPartNumbers = (schematic) => {
     const grid = schematic.map((row) => row.split(''))
 
@@ -56,6 +54,7 @@ const sumPartNumbers = (schematic) => {
     return sum
 }
 
+const schematic = require('./input')
 const result = sumPartNumbers(schematic)
 
 console.log(result)

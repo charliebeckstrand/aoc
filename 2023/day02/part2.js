@@ -1,5 +1,3 @@
-const games = require('./input')
-
 const getPowerOfCubes = (game) => {
     const sets = game
         .split(':')[1]
@@ -27,6 +25,7 @@ const getPowerOfCubes = (game) => {
     return Object.values(cubes).reduce((acc, amount) => acc * amount, 1)
 }
 
+const games = require('./input')
 const result = games.map((game) => getPowerOfCubes(game)).reduce((acc, game) => acc + game, 0)
 
 console.log(result)

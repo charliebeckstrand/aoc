@@ -1,5 +1,3 @@
-const games = require('./input')
-
 const getPossibleGames = (game) => {
     const availableCubes = { red: 12, green: 13, blue: 14 }
 
@@ -25,6 +23,7 @@ const getPossibleGames = (game) => {
         : 0
 }
 
+const games = require('./input')
 const result = games.map((game) => getPossibleGames(game)).reduce((acc, game) => acc + game, 0)
 
 console.log(result)

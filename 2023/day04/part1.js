@@ -1,6 +1,4 @@
-const input = require('./input')
-
-const calculatePoints = () => {
+const calculatePoints = (input) => {
     const cards = input.map((card) => {
         const [winningNumbers, numbers] = card
             .substring(card.indexOf(':') + 1)
@@ -36,6 +34,7 @@ const calculatePoints = () => {
     return totalPoints
 }
 
-const result = calculatePoints()
+const input = require('./input')
+const result = calculatePoints(input)
 
 console.log(result)

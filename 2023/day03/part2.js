@@ -1,5 +1,3 @@
-const schematic = require('./input')
-
 const sumGearRatios = (schematic) => {
     const mapNumbers = () => {
         const numbersMap = []
@@ -104,6 +102,7 @@ const sumGearRatios = (schematic) => {
     return sum
 }
 
+const schematic = require('./input')
 const result = sumGearRatios(schematic)
 
 console.log(result)

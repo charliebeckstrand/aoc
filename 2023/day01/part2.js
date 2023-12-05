@@ -1,5 +1,3 @@
-const items = require('./input')
-
 const getNumbers = (item) => {
     const numberWords = {
         nine: '9',
@@ -47,6 +45,7 @@ const getNumbers = (item) => {
     return parseInt(firstNumber + lastNumber)
 }
 
-const total = items.reduce((acc, item) => acc + getNumbers(item), 0)
+const items = require('./input')
+const result = items.reduce((acc, item) => acc + getNumbers(item), 0)
 
-console.log(`Total sum is: ${total}`)
+console.log(result)
