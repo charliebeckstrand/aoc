@@ -27,8 +27,7 @@ const processAlmanac = (almanac) => {
 
             acc.categories = acc.categories || {}
             acc.categories[title] = acc.categories[title] || []
-
-            acc.categories[title] = mapping
+            acc.categories[title] = mapping || []
         }
 
         return acc
@@ -65,13 +64,13 @@ const convertThroughCategories = (seed, categories) => {
     return currentNumber
 }
 
-const findLowestLocationNumber = (almanac) => {
-    const seeds = almanac['seeds']
+const findLowestLocationNumber = (processedAlmanac) => {
+    const seeds = processedAlmanac['seeds']
 
     let lowestLocation = Number.MAX_SAFE_INTEGER
 
     seeds.forEach((seed) => {
-        const locationNumber = convertThroughCategories(seed, almanac['categories'])
+        const locationNumber = convertThroughCategories(seed, processedAlmanac['categories'])
 
         if (locationNumber < lowestLocation) {
             lowestLocation = locationNumber

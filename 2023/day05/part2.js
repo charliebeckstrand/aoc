@@ -33,8 +33,7 @@ const processAlmanac = (almanac) => {
 
             acc.categories = acc.categories || {}
             acc.categories[title] = acc.categories[title] || []
-
-            acc.categories[title] = mapping
+            acc.categories[title] = mapping || []
         }
 
         return acc
