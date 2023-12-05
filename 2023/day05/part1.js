@@ -21,7 +21,6 @@ const processAlmanac = () => {
                 return [destStart, srcStart, rangeLength]
             })
 
-            // add the mapping to the data
             data['categories'] = {
                 ...data['categories'],
                 [title]: mapping
