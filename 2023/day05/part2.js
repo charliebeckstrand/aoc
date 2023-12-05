@@ -1,5 +1,3 @@
-const almanac = require('./input')
-
 const processSeedRanges = (section) => {
     const seeds = section.split(':')[1].trim().split(/\s+/).map(Number)
 
@@ -24,7 +22,7 @@ const processCategory = (section) => {
     return { title, mapping }
 }
 
-const processAlmanac = () => {
+const processAlmanac = (almanac) => {
     const sections = almanac.split('\n\n')
 
     return sections.reduce((acc, section) => {
@@ -43,7 +41,7 @@ const processAlmanac = () => {
     }, {})
 }
 
-function convertRange(range, mapping) {
+const convertRange = (range, mapping) => {
     let [start, length] = range
     let convertedRanges = []
 
@@ -69,7 +67,7 @@ function convertRange(range, mapping) {
     return convertedRanges.length > 0 ? convertedRanges : [[start, length]]
 }
 
-function convertThroughCategories(seedRange, categories) {
+const convertThroughCategories = (seedRange, categories) => {
     let currentRanges = [seedRange]
 
     for (const category in categories) {
@@ -87,11 +85,11 @@ function convertThroughCategories(seedRange, categories) {
     return currentRanges
 }
 
-function findLowestLocationNumber(data) {
+const findLowestLocationNumber = (processedAlmanac) => {
     let lowestLocation = Number.MAX_SAFE_INTEGER
 
-    data['seedRanges'].forEach((seedRange) => {
-        const locationRanges = convertThroughCategories(seedRange, data['categories'])
+    processedAlmanac['seedRanges'].forEach((seedRange) => {
+        const locationRanges = convertThroughCategories(seedRange, processedAlmanac['categories'])
 
         locationRanges.forEach(([start]) => {
             if (start < lowestLocation) {
@@ -103,7 +101,8 @@ function findLowestLocationNumber(data) {
     return lowestLocation
 }
 
-const data = processAlmanac()
-const result = findLowestLocationNumber(data)
+const almanac = require('./input')
+const processedAlmanac = processAlmanac(almanac)
+const result = findLowestLocationNumber(processedAlmanac)
 
 console.log(result)
