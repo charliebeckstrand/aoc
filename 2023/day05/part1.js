@@ -4,10 +4,6 @@ const processAlmanac = () => {
     const sections = almanac.split('\n\n')
 
     return sections.reduce((data, section) => {
-        /*
-            if the section starts with 'seeds:', then it's a list of seeds
-            otherwise, it's a mapping of numbers
-        */
         if (section.startsWith('seeds:')) {
             const values = section.split(':')[1].trim()
 
@@ -33,10 +29,11 @@ const processAlmanac = () => {
 
 const convertNumber = (number, mapping) => {
     /*
-        mapping is an array of arrays, where each sub-array is a range of numbers
-        the first element of the sub-array is the starting number of the range in the destination category
-        the second element of the sub-array is the starting number of the range in the source category
-        the third element of the sub-array is the length of the range
+        mapping is an array of arrays, where each sub-array is a mapping of the destination start,
+        the source start, and the range length
+        
+        if the number falls into the range of the source start and the range length, then
+        the number is converted to the destination start plus the difference between the number
     */
     for (const [destStart, srcStart, rangeLength] of mapping) {
         if (number >= srcStart && number < srcStart + rangeLength) {
@@ -51,21 +48,20 @@ const convertNumber = (number, mapping) => {
 const convertThroughCategories = (seed, categories) => {
     let currentNumber = seed
 
-    // loop through each key in the almanac and convert the number
     for (const key in categories) {
         if (categories.hasOwnProperty(key)) {
             currentNumber = convertNumber(currentNumber, categories[key])
         }
     }
 
-    // currentNumber is now the location number
     return currentNumber
 }
 
 const findLowestLocationNumber = (data) => {
     const seeds = data['seeds']
 
-    let lowestLocation = Number.MAX_SAFE_INTEGER // start with the highest possible number
+    // set the lowest location to the highest possible number
+    let lowestLocation = Number.MAX_SAFE_INTEGER
 
     seeds.forEach((seed) => {
         // convert the seed through each category
