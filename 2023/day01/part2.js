@@ -1,7 +1,6 @@
 const items = require('./input')
 
 const getNumbers = (item) => {
-    // map of number words to numbers
     const numberWords = {
         nine: '9',
         eight: '8',
@@ -17,10 +16,9 @@ const getNumbers = (item) => {
     let matches = []
     let i = 0
 
-    // loop through each character in the string
     while (i < item.length) {
         let matched = false
-        // loop through each number word
+
         for (const [word, number] of Object.entries(numberWords)) {
             if (item.substr(i, word.length) === word) {
                 matches.push(number)
@@ -29,6 +27,7 @@ const getNumbers = (item) => {
                 break
             }
         }
+
         if (!matched) {
             if (/\d/.test(item[i])) {
                 matches.push(item[i])
@@ -37,7 +36,6 @@ const getNumbers = (item) => {
         }
     }
 
-    // if no numbers were found, return 0
     if (matches.length === 0) {
         console.log(`No numbers found in "${item}"`)
         return 0
@@ -46,11 +44,9 @@ const getNumbers = (item) => {
     const firstNumber = matches[0]
     const lastNumber = matches[matches.length - 1]
 
-    // return the sum of the first and last numbers
     return parseInt(firstNumber + lastNumber)
 }
 
-// reduce the array of items to a single value
 const total = items.reduce((acc, item) => acc + getNumbers(item), 0)
 
 console.log(`Total sum is: ${total}`)

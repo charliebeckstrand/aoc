@@ -1,13 +1,10 @@
 const games = require('./input')
 
 const getPossibleGames = (game) => {
-    // available cubes of each color
     const availableCubes = { red: 12, green: 13, blue: 14 }
 
-    // get the game id and draws
     const [id, draws] = game.replace('Game ', '').split(':')
 
-    // split the game into an array of sets
     const sets = draws.split(';').map((set) =>
         set
             .trim()
@@ -18,7 +15,6 @@ const getPossibleGames = (game) => {
             })
     )
 
-    // check if the amount of cubes in each set is less than or equal to the limit
     return sets.every((set) =>
         Object.entries(availableCubes).every(
             ([color, limit]) =>

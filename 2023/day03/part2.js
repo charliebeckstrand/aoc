@@ -1,20 +1,19 @@
 const schematic = require('./input')
 
 const sumGearRatios = (schematic) => {
-    // Map the numbers in the engine schematic to their coordinates
     const mapNumbers = () => {
         const numbersMap = []
 
         for (let y = 0; y < schematic.length; y++) {
             let currentNumber = ''
-            let numberStartX = 0 // Start coordinate of the number
+            let numberStartX = 0
 
             for (let x = 0; x < schematic[y].length; x++) {
                 const char = schematic[y][x]
 
                 if (char >= '0' && char <= '9') {
                     if (currentNumber.length === 0) {
-                        numberStartX = x // Start of a new number
+                        numberStartX = x
                     }
                     currentNumber += char
                 } else {
@@ -22,14 +21,13 @@ const sumGearRatios = (schematic) => {
                         numbersMap.push({
                             number: parseInt(currentNumber),
                             startCoordinates: { x: numberStartX, y },
-                            endCoordinates: { x: x - 1, y } // End coordinate of the number
+                            endCoordinates: { x: x - 1, y }
                         })
                         currentNumber = ''
                     }
                 }
             }
 
-            // If the last character in the row is a number, add it to the map
             if (currentNumber.length > 0) {
                 numbersMap.push({
                     number: parseInt(currentNumber),
@@ -42,7 +40,6 @@ const sumGearRatios = (schematic) => {
         return numbersMap
     }
 
-    // Map the gear symbols in the engine schematic to their coordinates
     const mapGearSymbols = () => {
         const gearSymbolsMap = []
 
@@ -61,7 +58,6 @@ const sumGearRatios = (schematic) => {
         return gearSymbolsMap
     }
 
-    // Find gears by checking if a gear symbol is adjacent to exactly two numbers
     const findGears = (numbersMap, gearSymbolsMap) => {
         const gears = []
 
@@ -73,7 +69,10 @@ const sumGearRatios = (schematic) => {
                 const { startCoordinates, endCoordinates } = number
                 const { x: gearSymbolX, y: gearSymbolY } = gearSymbol.coordinates
 
-                // Check each point in the range from startCoordinates to endCoordinates to see if it is adjacent to the gear symbol
+                /*
+                    check if the number is adjacent to the gear symbol
+                    if it is, add it to the list of adjacent numbers and multiply it to the product
+                */
                 for (let x = startCoordinates.x; x <= endCoordinates.x; x++) {
                     if (
                         (x === gearSymbolX && gearSymbolY === startCoordinates.y - 1) || // top
@@ -93,7 +92,7 @@ const sumGearRatios = (schematic) => {
                 }
             }
 
-            // If the gear symbol is adjacent to exactly two numbers, add it to the list of gears
+            // if there are two adjacent numbers, add them to the list of gears
             if (adjacentNumbers.length === 2) {
                 gears.push({
                     numbers: adjacentNumbers,
@@ -105,7 +104,6 @@ const sumGearRatios = (schematic) => {
         return gears
     }
 
-    // Sum the products of the gear ratios
     const sum = findGears(mapNumbers(), mapGearSymbols()).reduce((acc, gear) => acc + gear.product, 0)
 
     return sum
