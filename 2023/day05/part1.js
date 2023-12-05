@@ -1,30 +1,34 @@
 const almanac = require('./input')
 
+const processSeeds = (section) => {
+    const seeds = section.split(':')[1].trim()
+
+    return seeds.split(/\s+/).map(Number)
+}
+
+const processCategory = (section) => {
+    const [title, values] = section.split(':\n')
+    const mapping = values.split('\n').map((line) => line.split(/\s+/).map(Number))
+
+    return { title, mapping }
+}
+
 const processAlmanac = () => {
     const sections = almanac.split('\n\n')
 
-    return sections.reduce((data, section) => {
+    const data = { seeds: [], categories: {} }
+
+    sections.forEach((section) => {
         if (section.startsWith('seeds:')) {
-            const values = section.split(':')[1].trim()
-
-            data['seeds'] = values.split(/\s+/).map(Number)
+            data.seeds = processSeeds(section)
         } else {
-            const [title, values] = section.split(':\n')
+            const { title, mapping } = processCategory(section)
 
-            const mapping = values.split('\n').map((line) => {
-                const [destStart, srcStart, rangeLength] = line.split(/\s+/).map(Number)
-
-                return [destStart, srcStart, rangeLength]
-            })
-
-            data['categories'] = {
-                ...data['categories'],
-                [title]: mapping
-            }
+            data.categories[title] = mapping
         }
+    })
 
-        return data
-    }, {})
+    return data
 }
 
 const convertNumber = (number, mapping) => {

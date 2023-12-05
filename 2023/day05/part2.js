@@ -1,36 +1,47 @@
 const almanac = require('./input')
 
+const processSeedRanges = (section) => {
+    const seeds = section.split(':')[1].trim().split(/\s+/).map(Number)
+
+    return seeds.reduce((ranges, value, i) => {
+        if (i % 2 === 0) {
+            ranges.push([value, seeds[i + 1]])
+        }
+
+        return ranges
+    }, [])
+}
+
+const processCategory = (section) => {
+    const [title, values] = section.split(':\n')
+
+    const mapping = values.split('\n').map((line) => {
+        const [destStart, srcStart, rangeLength] = line.split(/\s+/).map(Number)
+
+        return [destStart, srcStart, rangeLength]
+    })
+
+    return { title, mapping }
+}
+
 const processAlmanac = () => {
     const sections = almanac.split('\n\n')
 
-    return sections.reduce((data, section) => {
+    const data = { seedRanges: [], categories: {} }
+
+    return sections.reduce((acc, section) => {
         if (section.startsWith('seeds:')) {
-            const values = section.split(':')[1].trim().split(/\s+/).map(Number)
-
-            data['seedRanges'] = []
-
-            for (let i = 0; i < values.length; i += 2) {
-                let start = values[i]
-                let length = values[i + 1]
-
-                data['seedRanges'].push([start, length])
-            }
+            acc.seedRanges = processSeedRanges(section)
         } else {
-            const [title, values] = section.split(':\n')
+            const { title, mapping } = processCategory(section)
 
-            const mapping = values.split('\n').map((line) => {
-                const [destStart, srcStart, rangeLength] = line.split(/\s+/).map(Number)
+            acc.categories = acc.categories || {}
+            acc.categories[title] = acc.categories[title] || []
 
-                return [destStart, srcStart, rangeLength]
-            })
-
-            data['categories'] = {
-                ...data['categories'],
-                [title]: mapping
-            }
+            acc.categories[title] = mapping
         }
 
-        return data
+        return acc
     }, {})
 }
 
