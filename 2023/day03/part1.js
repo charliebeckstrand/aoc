@@ -38,7 +38,6 @@ const sumPartNumbers = (schematic) => {
             // skip the cell if it's a symbol or if the previous cell is a number
             if (isSymbol(row[col]) || (col > 0 && isNumber(row[col - 1]))) continue
 
-            //
             if (isNumber(row[col])) {
                 let fullNumber = ''
 
