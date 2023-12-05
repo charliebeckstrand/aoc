@@ -84,11 +84,11 @@ const convertThroughCategories = (seedRange, categories) => {
     return currentRanges
 }
 
-const findLowestLocationNumber = (processedAlmanac) => {
+const findLowestLocationNumber = (almanac) => {
     let lowestLocation = Number.MAX_SAFE_INTEGER
 
-    processedAlmanac['seedRanges'].forEach((seedRange) => {
-        const locationRanges = convertThroughCategories(seedRange, processedAlmanac['categories'])
+    almanac['seedRanges'].forEach((seedRange) => {
+        const locationRanges = convertThroughCategories(seedRange, almanac['categories'])
 
         locationRanges.forEach(([start]) => {
             if (start < lowestLocation) {
@@ -100,8 +100,8 @@ const findLowestLocationNumber = (processedAlmanac) => {
     return lowestLocation
 }
 
-const almanac = require('./input')
-const processedAlmanac = processAlmanac(almanac)
-const result = findLowestLocationNumber(processedAlmanac)
+const input = require('./input')
+const almanac = processAlmanac(input)
+const result = findLowestLocationNumber(almanac)
 
 console.log(result)
