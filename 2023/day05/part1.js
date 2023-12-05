@@ -15,7 +15,17 @@ const processAlmanac = () => {
         } else {
             const [title, values] = section.split(':\n')
 
-            data[title.trim()] = values.split('\n').map((line) => line.trim().split(/\s+/).map(Number))
+            const mapping = values.split('\n').map((line) => {
+                const [destStart, srcStart, rangeLength] = line.split(/\s+/).map(Number)
+
+                return [destStart, srcStart, rangeLength]
+            })
+
+            // add the mapping to the data
+            data['categories'] = {
+                ...data['categories'],
+                [title]: mapping
+            }
         }
 
         return data
@@ -39,17 +49,15 @@ const convertNumber = (number, mapping) => {
     return number
 }
 
-const convertThroughCategories = (seed, almanac) => {
+const convertThroughCategories = (seed, categories) => {
     let currentNumber = seed
 
-    // convert through each category in the almanac
-    currentNumber = convertNumber(currentNumber, almanac['seed-to-soil map'])
-    currentNumber = convertNumber(currentNumber, almanac['soil-to-fertilizer map'])
-    currentNumber = convertNumber(currentNumber, almanac['fertilizer-to-water map'])
-    currentNumber = convertNumber(currentNumber, almanac['water-to-light map'])
-    currentNumber = convertNumber(currentNumber, almanac['light-to-temperature map'])
-    currentNumber = convertNumber(currentNumber, almanac['temperature-to-humidity map'])
-    currentNumber = convertNumber(currentNumber, almanac['humidity-to-location map'])
+    // loop through each key in the almanac and convert the number
+    for (const key in categories) {
+        if (categories.hasOwnProperty(key)) {
+            currentNumber = convertNumber(currentNumber, categories[key])
+        }
+    }
 
     // currentNumber is now the location number
     return currentNumber
@@ -58,11 +66,11 @@ const convertThroughCategories = (seed, almanac) => {
 const findLowestLocationNumber = (data) => {
     const seeds = data['seeds']
 
-    let lowestLocation = Infinity // start with infinity so that the first location number is always lower
+    let lowestLocation = Number.MAX_SAFE_INTEGER // start with the highest possible number
 
     seeds.forEach((seed) => {
         // convert the seed through each category
-        const locationNumber = convertThroughCategories(seed, data)
+        const locationNumber = convertThroughCategories(seed, data['categories'])
 
         // if the location number is lower than the current lowest, then update the lowest
         if (locationNumber < lowestLocation) {
