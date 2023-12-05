@@ -35,20 +35,12 @@ const processInput = (input) => {
 }
 
 const convertNumber = (number, mapping) => {
-    /*
-        mapping is an array of arrays, where each sub-array is a mapping of the destination start,
-        the source start, and the range length
-        
-        if the number falls into the range of the source start and the range length, then
-        the number is converted to the destination start plus the difference between the number
-    */
     for (const [destStart, srcStart, rangeLength] of mapping) {
         if (number >= srcStart && number < srcStart + rangeLength) {
             return destStart + (number - srcStart)
         }
     }
 
-    // if the number doesn't fall into any of the ranges, then it's already in the destination category
     return number
 }
 

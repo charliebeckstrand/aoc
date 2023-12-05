@@ -44,16 +44,10 @@ const convertRange = (range, mapping) => {
     let [start, length] = range
     let convertedRanges = []
 
-    /*
-        loop through each mapping and check if the number falls into the source range
-        if it does, then convert it to the destination range
-        if it doesn't, then move on to the next mapping
-    */
     mapping.forEach(([destStart, srcStart, rangeLength]) => {
         let srcEnd = srcStart + rangeLength
 
         if (start < srcEnd && start + length > srcStart) {
-            // calculate the overlap between the two ranges
             let overlapStart = Math.max(start, srcStart)
             let overlapEnd = Math.min(start + length, srcEnd)
             let newStart = destStart + (overlapStart - srcStart)
@@ -62,7 +56,6 @@ const convertRange = (range, mapping) => {
         }
     })
 
-    // if the range doesn't overlap with any of the ranges, then it's already in the destination category, so return it as-is
     return convertedRanges.length > 0 ? convertedRanges : [[start, length]]
 }
 

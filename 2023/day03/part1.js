@@ -35,18 +35,15 @@ const sumPartNumbers = (schematic) => {
 
     const sum = grid.reduce((acc, row, rowIndex) => {
         for (let col = 0; col < row.length; col++) {
-            // skip the cell if it's a symbol or if the previous cell is a number
             if (isSymbol(row[col]) || (col > 0 && isNumber(row[col - 1]))) continue
 
             if (isNumber(row[col])) {
                 let fullNumber = ''
 
-                // if the cell is a number, keep going until the end of the number
                 while (col < row.length && isNumber(row[col])) {
                     fullNumber += row[col++]
                 }
 
-                // if the number is a part number, add it to the sum
                 if (isPartNumber(fullNumber, rowIndex, col - fullNumber.length, grid, isSymbol)) {
                     acc += parseInt(fullNumber, 10)
                 }

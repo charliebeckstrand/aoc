@@ -21,10 +21,8 @@ const calculatePoints = () => {
         })
 
         if (winningNumbers.length >= 1) {
-            // if you have at least one winning number, you get 1 point
             cardPoints = 1
 
-            // for each additional winning number, double the points
             for (let i = 1; i < winningNumbers.length; i++) {
                 cardPoints *= 2
             }

@@ -69,10 +69,6 @@ const sumGearRatios = (schematic) => {
                 const { startCoordinates, endCoordinates } = number
                 const { x: gearSymbolX, y: gearSymbolY } = gearSymbol.coordinates
 
-                /*
-                    check if the number is adjacent to the gear symbol
-                    if it is, add it to the list of adjacent numbers and multiply it to the product
-                */
                 for (let x = startCoordinates.x; x <= endCoordinates.x; x++) {
                     if (
                         (x === gearSymbolX && gearSymbolY === startCoordinates.y - 1) || // top
@@ -92,7 +88,6 @@ const sumGearRatios = (schematic) => {
                 }
             }
 
-            // if there are two adjacent numbers, add them to the list of gears
             if (adjacentNumbers.length === 2) {
                 gears.push({
                     numbers: adjacentNumbers,
