@@ -8,7 +8,12 @@ const processSeeds = (section) => {
 
 const processCategory = (section) => {
     const [title, values] = section.split(':\n')
-    const mapping = values.split('\n').map((line) => line.split(/\s+/).map(Number))
+
+    const mapping = values.split('\n').map((line) => {
+        const [destStart, srcStart, rangeLength] = line.split(/\s+/).map(Number)
+
+        return [destStart, srcStart, rangeLength]
+    })
 
     return { title, mapping }
 }
@@ -16,19 +21,20 @@ const processCategory = (section) => {
 const processAlmanac = () => {
     const sections = almanac.split('\n\n')
 
-    const data = { seeds: [], categories: {} }
-
-    sections.forEach((section) => {
+    return sections.reduce((acc, section) => {
         if (section.startsWith('seeds:')) {
-            data.seeds = processSeeds(section)
+            acc.seeds = processSeeds(section)
         } else {
             const { title, mapping } = processCategory(section)
 
-            data.categories[title] = mapping
-        }
-    })
+            acc.categories = acc.categories || {}
+            acc.categories[title] = acc.categories[title] || []
 
-    return data
+            acc.categories[title] = mapping
+        }
+
+        return acc
+    }, {})
 }
 
 const convertNumber = (number, mapping) => {

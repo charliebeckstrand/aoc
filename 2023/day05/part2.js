@@ -27,8 +27,6 @@ const processCategory = (section) => {
 const processAlmanac = () => {
     const sections = almanac.split('\n\n')
 
-    const data = { seedRanges: [], categories: {} }
-
     return sections.reduce((acc, section) => {
         if (section.startsWith('seeds:')) {
             acc.seedRanges = processSeedRanges(section)
