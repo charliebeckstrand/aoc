@@ -13,9 +13,9 @@ const waysToBeatRecord = (raceTime, recordDistance) => {
     let count = 0
 
     for (let holdTime = 0; holdTime < raceTime; holdTime++) {
-        let speed = holdTime
-        let travelTime = raceTime - holdTime
-        let distance = speed * travelTime
+        const speed = holdTime
+        const travelTime = raceTime - holdTime
+        const distance = speed * travelTime
 
         if (distance > recordDistance) {
             count++
