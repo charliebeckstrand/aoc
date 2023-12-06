@@ -11,15 +11,17 @@ const processInput = (input) => {
 
 const waysToBeatRecord = (raceTime, recordDistance) => {
     let count = 0
+    let holdTime = 0
 
-    for (let holdTime = 0; holdTime < raceTime; holdTime++) {
-        const speed = holdTime
-        const travelTime = raceTime - holdTime
+    while (holdTime < raceTime) {
+        const [speed, travelTime] = [holdTime, raceTime - holdTime]
         const distance = speed * travelTime
 
         if (distance > recordDistance) {
             count++
         }
+
+        holdTime++
     }
 
     return count

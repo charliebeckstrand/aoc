@@ -13,28 +13,26 @@ const processInput = (input) => {
 
 const waysToBeatRecord = (raceTime, recordDistance) => {
     let count = 0
+    let holdTime = 0
 
-    for (let holdTime = 0; holdTime < raceTime; holdTime++) {
-        const speed = holdTime
-        const travelTime = raceTime - holdTime
+    while (holdTime < raceTime) {
+        const [speed, travelTime] = [holdTime, raceTime - holdTime]
         const distance = speed * travelTime
 
         if (distance > recordDistance) {
             count++
         }
+
+        holdTime++
     }
 
     return count
 }
 
-const findWinCons = (races) => {
-    return races.reduce((total, race) => {
-        return total * waysToBeatRecord(race.time, race.distance)
-    }, 1)
-}
-
 const input = require('./input')
 const races = processInput(input)
-const result = findWinCons(races)
+const result = races.reduce((total, race) => {
+    return total * waysToBeatRecord(race.time, race.distance)
+}, 1)
 
 console.log(result)
