@@ -105,9 +105,9 @@ const processInput = (input) => {
         }
     })
 
-    const ranked = rankHands(sortedHands)
+    const rankedHands = rankHands(sortedHands)
 
-    return ranked
+    return rankedHands
 }
 
 const input = require('./input')
