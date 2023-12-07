@@ -21,10 +21,9 @@ const evaluateHandWithJoker = (handArray) => {
     for (const card of cards) {
         if (card === 'J') continue
 
-        const modifiedHand = handArray.map(([c, s]) => (c === 'J' ? [card, getCardStrength(card)] : [c, s]))
-
-        modifiedHand.sort((a, b) => b[1] - a[1])
-
+        const modifiedHand = handArray
+            .map(([c, s]) => (c === 'J' ? [card, getCardStrength(card)] : [c, s]))
+            .sort((a, b) => b[1] - a[1])
         const currentHand = evaluateHandWithoutJoker(modifiedHand)
 
         if (handTypes.indexOf(currentHand.type) < handTypes.indexOf(bestHand.type)) {
