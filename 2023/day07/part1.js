@@ -3,7 +3,7 @@ const handTypes = ['fiveOfAKind', 'fourOfAKind', 'fullHouse', 'threeOfAKind', 't
 
 const getCardStrength = (card) => cards.indexOf(card)
 
-const getHandType = (hand) => {
+const evaluateHandType = (hand) => {
     const handArray = hand.cards.map((card) => [card, getCardStrength(card)])
 
     handArray.sort((a, b) => b[1] - a[1])
@@ -30,8 +30,8 @@ const getHandType = (hand) => {
 }
 
 const compareHands = (handA, handB) => {
-    const typeA = getHandType(handA)
-    const typeB = getHandType(handB)
+    const typeA = evaluateHandType(handA)
+    const typeB = evaluateHandType(handB)
 
     const typeIndexA = handTypes.indexOf(typeA.type)
     const typeIndexB = handTypes.indexOf(typeB.type)
