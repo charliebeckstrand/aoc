@@ -1,22 +1,19 @@
 const move = (currentNode, direction, nodes) => {
-    const nextNode = nodes.find((node) => node.node === (direction === 'L' ? currentNode.left : currentNode.right))
-
-    return nextNode
+    return nodes.find((node) => node.node === (direction === 'L' ? currentNode.left : currentNode.right))
 }
 
-const findZZZ = (instructions, nodes) => {
-    let currentNode = nodes.find((node) => node.node === 'AAA')
-    let count = 0
+const findZZZ = (currentNode, instructions, nodes) => {
+    let steps = 0
 
     while (currentNode.node !== 'ZZZ') {
-        const direction = instructions[count % instructions.length]
+        const direction = instructions[steps % instructions.length]
 
         currentNode = move(currentNode, direction, nodes)
 
-        count++
+        steps++
     }
 
-    return count
+    return steps
 }
 
 const processInput = (input) => {
@@ -36,7 +33,11 @@ const processInput = (input) => {
 }
 
 const input = require('./input')
-const map = processInput(input)
-const result = findZZZ(map.instructions, map.nodes)
+const { instructions, nodes } = processInput(input)
+const result = findZZZ(
+    nodes.find((node) => node.node === 'AAA'),
+    instructions,
+    nodes
+)
 
 console.log(result)
