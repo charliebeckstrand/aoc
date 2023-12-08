@@ -1,14 +1,10 @@
-const move = (currentNode, direction, nodes) => {
-    return nodes.find((node) => node.node === (direction === 'L' ? currentNode.left : currentNode.right))
-}
-
-const findZZZ = (currentNode, instructions, nodes) => {
+const getSteps = (currentNode, directions, nodes) => {
     let steps = 0
 
     while (currentNode.node !== 'ZZZ') {
-        const direction = instructions[steps % instructions.length]
+        const direction = directions[steps % directions.length]
 
-        currentNode = move(currentNode, direction, nodes)
+        currentNode = nodes.find((node) => node.node === (direction === 'L' ? currentNode.left : currentNode.right))
 
         steps++
     }
@@ -17,23 +13,23 @@ const findZZZ = (currentNode, instructions, nodes) => {
 }
 
 const processInput = (input) => {
-    const lines = input.split('\n').filter(Boolean)
-    const instructions = lines[0].split('')
-    const nodes = lines.slice(1).map((line) => {
-        const [node, directions] = line.split(' = ')
-        const [left, right] = directions.slice(1, -1).split(', ')
+    const [directionsLine, ...nodeLines] = input.split('\n').filter(Boolean)
+    const directions = directionsLine.split('')
+    const nodes = nodeLines.map((line) => {
+        const [node, neighbors] = line.split(' = ')
+        const [left, right] = neighbors.slice(1, -1).split(', ')
 
         return { node, left, right }
     })
 
-    return { instructions, nodes }
+    return { directions, nodes }
 }
 
 const input = require('./input')
-const { instructions, nodes } = processInput(input)
-const result = findZZZ(
+const { directions, nodes } = processInput(input)
+const result = getSteps(
     nodes.find((node) => node.node === 'AAA'),
-    instructions,
+    directions,
     nodes
 )
 
