@@ -17,19 +17,16 @@ const findZZZ = (currentNode, instructions, nodes) => {
 }
 
 const processInput = (input) => {
-    const [firstLine, ...otherLines] = input.split('\n').filter(Boolean)
-    const instructions = firstLine.split('')
-    const nodes = otherLines.map((line) => {
+    const lines = input.split('\n').filter(Boolean)
+    const instructions = lines[0].split('')
+    const nodes = lines.slice(1).map((line) => {
         const [node, directions] = line.split(' = ')
         const [left, right] = directions.slice(1, -1).split(', ')
 
         return { node, left, right }
     })
 
-    return {
-        instructions,
-        nodes
-    }
+    return { instructions, nodes }
 }
 
 const input = require('./input')
