@@ -8,7 +8,7 @@ const calculateDifferences = (sequence) => {
     return differences
 }
 
-const processSequence = (sequence) => {
+const generateLayers = (sequence) => {
     let layers = [sequence]
     let currentLayer = sequence
 
@@ -21,20 +21,20 @@ const processSequence = (sequence) => {
     return layers
 }
 
-const sumOfExtrapolatedValues = (sensor) => {
+const sumOfLayerValues = (sensor) => {
     const values = sensor
-        .map((sequence) => processSequence(sequence))
+        .map((sequence) => generateLayers(sequence))
         .map((layers) => layers.reduce((acc, layer) => acc + layer[layer.length - 1], 0))
 
     return values.reduce((sum, nextValue) => sum + nextValue, 0)
 }
 
-const processInput = (input) => {
+const parseInputToNumericArrays = (input) => {
     return input.split('\n').map((line) => line.split(' ').map((val) => Number(val)))
 }
 
 const input = require('./input')
-const oasisAndSandInstabilitySensor = processInput(input)
-const result = sumOfExtrapolatedValues(oasisAndSandInstabilitySensor)
+const oasisAndSandInstabilitySensor = parseInputToNumericArrays(input)
+const result = sumOfLayerValues(oasisAndSandInstabilitySensor)
 
 console.log(result)
