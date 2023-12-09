@@ -1,7 +1,3 @@
-const processInput = (input) => {
-    return input.split('\n').map((line) => line.split(' ').map((val) => Number(val)))
-}
-
 const calculateDifferences = (sequence) => {
     let differences = []
 
@@ -31,6 +27,10 @@ const sumOfExtrapolatedValues = (sensor) => {
         .map((layers) => layers.reduce((acc, layer) => acc + layer[layer.length - 1], 0))
 
     return values.reduce((sum, nextValue) => sum + nextValue, 0)
+}
+
+const processInput = (input) => {
+    return input.split('\n').map((line) => line.split(' ').map((val) => Number(val)))
 }
 
 const input = require('./input')
