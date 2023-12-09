@@ -25,8 +25,8 @@ const processSequence = (sequence) => {
     return layers
 }
 
-const sumOfExtrapolatedValues = (data) => {
-    const values = data
+const sumOfExtrapolatedValues = (sensor) => {
+    const values = sensor
         .map((sequence) => processSequence(sequence))
         .map((layers) => layers.reduce((acc, layer) => acc + layer[layer.length - 1], 0))
 
