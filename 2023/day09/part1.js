@@ -21,7 +21,7 @@ const generateLayers = (sequence) => {
     return layers
 }
 
-const sumOfLayerValues = (sensor) => {
+const sumLayerValues = (sensor) => {
     const values = sensor
         .map((sequence) => generateLayers(sequence))
         .map((layers) => layers.reduce((acc, layer) => acc + layer[layer.length - 1], 0))
@@ -35,6 +35,6 @@ const parseInputToNumericArrays = (input) => {
 
 const input = require('./input')
 const oasisAndSandInstabilitySensor = parseInputToNumericArrays(input)
-const result = sumOfLayerValues(oasisAndSandInstabilitySensor)
+const result = sumLayerValues(oasisAndSandInstabilitySensor)
 
 console.log(result)
