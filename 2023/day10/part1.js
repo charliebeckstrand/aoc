@@ -12,7 +12,7 @@ const directionOffsets = [
     { x: -1, y: 0 } // W
 ]
 
-const links = {
+const directionLinks = {
     '|': [directions.S, directions.N],
     '-': [directions.W, directions.E],
     L: [directions.N, directions.E],
@@ -29,7 +29,7 @@ const getLinks = (direction, x, y, start) => {
         return []
     }
 
-    return links[direction] || []
+    return directionLinks[direction] || []
 }
 
 const parseGrid = (input) => {
