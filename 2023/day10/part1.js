@@ -12,7 +12,7 @@ const directionOffsets = [
     { x: -1, y: 0 } // W
 ]
 
-const directionLinks = {
+const directionConnections = {
     '|': [directions.S, directions.N],
     '-': [directions.W, directions.E],
     L: [directions.N, directions.E],
@@ -21,7 +21,7 @@ const directionLinks = {
     F: [directions.S, directions.E]
 }
 
-const getLinks = (direction, x, y, start) => {
+const getLinkedDirections = (direction, x, y, start) => {
     if (direction === 'S') {
         start.x = x
         start.y = y
@@ -29,22 +29,22 @@ const getLinks = (direction, x, y, start) => {
         return []
     }
 
-    return directionLinks[direction] || []
+    return directionConnections[direction] || []
 }
 
 const parseGrid = (input) => {
     return input.split('\n').map((row) => row.split(''))
 }
 
-const initializeMap = (grid, start) => {
+const generateMap = (grid, start) => {
     return grid.map((row, y) =>
         row.map((direction, x) => ({
-            links: getLinks(direction, x, y, start)
+            links: getLinkedDirections(direction, x, y, start)
         }))
     )
 }
 
-const updateMapLinks = (map, start) => {
+const updateLinksAroundPosition = (map, start) => {
     const updateLinks = (condition, y, x, direction) => {
         if (condition) {
             map[y][x].links.push(direction)
@@ -67,14 +67,15 @@ const updateMapLinks = (map, start) => {
     )
 }
 
-const calculateDistances = (map, start) => {
+const calculateShortestDistances = (map, start) => {
     const stack = [{ position: start, distance: 0 }]
 
     while (stack.length > 0) {
         const { position, distance } = stack.shift()
 
-        if (map[position.y][position.x].distance !== undefined && map[position.y][position.x].distance <= distance)
+        if (map[position.y][position.x].distance !== undefined && map[position.y][position.x].distance <= distance) {
             continue
+        }
 
         map[position.y][position.x].distance = distance
         map[position.y][position.x].links.forEach((direction) =>
@@ -89,20 +90,18 @@ const calculateDistances = (map, start) => {
     }
 }
 
-const findMaximumDistance = (map) => Math.max(...map.flat().map((position) => position.distance || 0))
-
-const findFurthestPoint = (input) => {
+const findMaxDistanceFromStart = (input) => {
     const start = {}
     const grid = parseGrid(input)
-    const map = initializeMap(grid, start)
+    const map = generateMap(grid, start)
 
-    updateMapLinks(map, start)
-    calculateDistances(map, start)
+    updateLinksAroundPosition(map, start)
+    calculateShortestDistances(map, start)
 
-    return findMaximumDistance(map)
+    return Math.max(...map.flat().map((position) => position.distance || 0))
 }
 
 const input = require('./input')
-const result = findFurthestPoint(input)
+const result = findMaxDistanceFromStart(input)
 
 console.log(result)
