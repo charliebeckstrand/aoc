@@ -1,18 +1,11 @@
 const directions = {
-    N: 0,
-    S: 1,
-    E: 2,
-    W: 3
+    N: { x: 0, y: -1 },
+    S: { x: 0, y: 1 },
+    E: { x: 1, y: 0 },
+    W: { x: -1, y: 0 }
 }
 
-const directionOffsets = [
-    { x: 0, y: -1 }, // N
-    { x: 0, y: 1 }, // S
-    { x: 1, y: 0 }, // E
-    { x: -1, y: 0 } // W
-]
-
-const directionConnections = {
+const connections = {
     '|': [directions.S, directions.N],
     '-': [directions.W, directions.E],
     L: [directions.N, directions.E],
@@ -21,7 +14,7 @@ const directionConnections = {
     F: [directions.S, directions.E]
 }
 
-const getLinkedDirections = (direction, x, y, start) => {
+const getLinks = (direction, x, y, start) => {
     if (direction === 'S') {
         start.x = x
         start.y = y
@@ -29,17 +22,13 @@ const getLinkedDirections = (direction, x, y, start) => {
         return []
     }
 
-    return directionConnections[direction] || []
-}
-
-const parseGrid = (input) => {
-    return input.split('\n').map((row) => row.split(''))
+    return connections[direction] || []
 }
 
 const generateMap = (grid, start) => {
     return grid.map((row, y) =>
         row.map((direction, x) => ({
-            links: getLinkedDirections(direction, x, y, start)
+            links: getLinks(direction, x, y, start)
         }))
     )
 }
@@ -81,8 +70,8 @@ const calculateShortestDistances = (map, start) => {
         map[position.y][position.x].links.forEach((direction) =>
             stack.push({
                 position: {
-                    x: position.x + directionOffsets[direction].x,
-                    y: position.y + directionOffsets[direction].y
+                    x: position.x + direction.x,
+                    y: position.y + direction.y
                 },
                 distance: distance + 1
             })
@@ -92,7 +81,8 @@ const calculateShortestDistances = (map, start) => {
 
 const findMaxDistanceFromStart = (input) => {
     const start = {}
-    const grid = parseGrid(input)
+
+    const grid = input.split('\n').map((row) => row.split(''))
     const map = generateMap(grid, start)
 
     updateLinksAroundPosition(map, start)
