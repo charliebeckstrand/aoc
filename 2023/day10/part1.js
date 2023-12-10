@@ -25,14 +25,6 @@ const getLinks = (direction, x, y, start) => {
     return connections[direction] || []
 }
 
-const generateMap = (grid, start) => {
-    return grid.map((row, y) =>
-        row.map((direction, x) => ({
-            links: getLinks(direction, x, y, start)
-        }))
-    )
-}
-
 const updateLinksAroundPosition = (map, start) => {
     const updateLinks = (condition, y, x, direction) => {
         if (condition) {
@@ -79,10 +71,21 @@ const calculateShortestDistances = (map, start) => {
     }
 }
 
+const parseGrid = (input) => {
+    return input.split('\n').map((row) => row.split(''))
+}
+
+const generateMap = (grid, start) => {
+    return grid.map((row, y) =>
+        row.map((direction, x) => ({
+            links: getLinks(direction, x, y, start)
+        }))
+    )
+}
+
 const findMaxDistanceFromStart = (input) => {
     const start = {}
-
-    const grid = input.split('\n').map((row) => row.split(''))
+    const grid = parseGrid(input)
     const map = generateMap(grid, start)
 
     updateLinksAroundPosition(map, start)
