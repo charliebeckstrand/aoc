@@ -26,14 +26,13 @@ const getLinks = (direction, x, y, start) => {
 }
 
 const updateLinksAroundPosition = (map, start) => {
-    const { x, y } = start
+    const isWithinMap = (x, y) =>
+        start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
 
-    const isWithinMap = (dx, dy) => x + dx >= 0 && x + dx < map[0].length && y + dy >= 0 && y + dy < map.length
-
-    const updateLink = (currentDirection, neighborDirection, dx, dy) => {
+    const updateLink = (currentDirection, neighborDirection, x, y) => {
         if (isWithinMap) {
-            const currentCell = map[y][x]
-            const neighborCell = map[y + dy][x + dx]
+            const currentCell = map[start.y][start.x]
+            const neighborCell = map[start.y + y][start.x + x]
 
             if (neighborCell.links.includes(currentDirection)) {
                 currentCell.links.push(neighborDirection)
@@ -71,7 +70,10 @@ const calculateShortestDistances = (map, start) => {
 }
 
 const findMaxDistanceFromStart = (input) => {
-    const start = {}
+    const start = {
+        x: 0,
+        y: 0
+    }
 
     const grid = input.split('\n').map((row) => row.split(''))
     const map = grid.map((row, y) =>
