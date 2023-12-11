@@ -5,13 +5,14 @@ const directions = {
     W: { x: -1, y: 0 }
 }
 
+// prettier-ignore
 const connections = {
     '|': [directions.S, directions.N],
     '-': [directions.W, directions.E],
-    L: [directions.N, directions.E],
-    J: [directions.N, directions.W],
-    7: [directions.S, directions.W],
-    F: [directions.S, directions.E]
+    'L': [directions.N, directions.E],
+    'J': [directions.N, directions.W],
+    '7': [directions.S, directions.W],
+    'F': [directions.S, directions.E]
 }
 
 const updateNeighborLinks = (map, start) => {
