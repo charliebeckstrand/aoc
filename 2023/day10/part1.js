@@ -14,17 +14,6 @@ const connections = {
     F: [directions.S, directions.E]
 }
 
-const getLinks = (direction, x, y, start) => {
-    if (direction === 'S') {
-        start.x = x
-        start.y = y
-
-        return []
-    }
-
-    return connections[direction] || []
-}
-
 const updateLinksAroundPosition = (map, start) => {
     const isWithinMap = (x, y) =>
         start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
@@ -73,6 +62,17 @@ const findMaxDistanceFromStart = (input) => {
     const start = {
         x: 0,
         y: 0
+    }
+
+    const getLinks = (direction, x, y, start) => {
+        if (direction === 'S') {
+            start.x = x
+            start.y = y
+
+            return []
+        }
+
+        return connections[direction] || []
     }
 
     const grid = input.split('\n').map((row) => row.split(''))
