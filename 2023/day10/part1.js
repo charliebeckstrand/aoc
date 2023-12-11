@@ -14,7 +14,7 @@ const connections = {
     F: [directions.S, directions.E]
 }
 
-const updateLinksAroundPosition = (map, start) => {
+const updateNeighborLinks = (map, start) => {
     const withinMap = (x, y) =>
         start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
 
@@ -85,7 +85,7 @@ const findMaxDistanceFromStart = (input) => {
         }))
     )
 
-    updateLinksAroundPosition(map, start)
+    updateNeighborLinks(map, start)
     calculateShortestDistances(map, start)
 
     return Math.max(...map.flat().map((position) => position.distance || 0))
