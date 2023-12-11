@@ -29,7 +29,7 @@ const updateLinksAroundPosition = (map, start) => {
     const isWithinMap = (x, y) =>
         start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
 
-    const updateLink = (currentDirection, neighborDirection, x, y) => {
+    const updateLinks = (currentDirection, neighborDirection, x, y) => {
         if (isWithinMap) {
             const currentCell = map[start.y][start.x]
             const neighborCell = map[start.y + y][start.x + x]
@@ -40,10 +40,10 @@ const updateLinksAroundPosition = (map, start) => {
         }
     }
 
-    updateLink(directions.E, directions.W, -1, 0)
-    updateLink(directions.W, directions.E, 1, 0)
-    updateLink(directions.S, directions.N, 0, -1)
-    updateLink(directions.N, directions.S, 0, 1)
+    updateLinks(directions.E, directions.W, -1, 0)
+    updateLinks(directions.W, directions.E, 1, 0)
+    updateLinks(directions.S, directions.N, 0, -1)
+    updateLinks(directions.N, directions.S, 0, 1)
 }
 
 const calculateShortestDistances = (map, start) => {
