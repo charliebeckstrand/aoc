@@ -15,11 +15,11 @@ const connections = {
 }
 
 const updateLinksAroundPosition = (map, start) => {
-    const isWithinMap = (x, y) =>
+    const withinMap = (x, y) =>
         start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
 
     const updateLinks = (currentDirection, neighborDirection, x, y) => {
-        if (isWithinMap) {
+        if (withinMap(x, y)) {
             const currentCell = map[start.y][start.x]
             const neighborCell = map[start.y + y][start.x + x]
 
@@ -41,7 +41,10 @@ const calculateShortestDistances = (map, start) => {
     while (stack.length > 0) {
         const { position, distance } = stack.shift()
 
-        if (map[position.y][position.x].distance !== undefined && map[position.y][position.x].distance <= distance) {
+        const cellAlreadyVisited =
+            map[position.y][position.x].distance !== undefined && map[position.y][position.x].distance <= distance
+
+        if (cellAlreadyVisited) {
             continue
         }
 
