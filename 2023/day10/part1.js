@@ -26,26 +26,25 @@ const getLinks = (direction, x, y, start) => {
 }
 
 const updateLinksAroundPosition = (map, start) => {
-    const updateLinks = (condition, y, x, direction) => {
-        if (condition) {
-            map[y][x].links.push(direction)
+    const { x, y } = start
+
+    const isWithinMap = (dx, dy) => x + dx >= 0 && x + dx < map[0].length && y + dy >= 0 && y + dy < map.length
+
+    const updateLink = (currentDirection, neighborDirection, dx, dy) => {
+        if (isWithinMap) {
+            const currentCell = map[y][x]
+            const neighborCell = map[y + dy][x + dx]
+
+            if (neighborCell.links.includes(currentDirection)) {
+                currentCell.links.push(neighborDirection)
+            }
         }
     }
 
-    updateLinks(start.x > 0 && map[start.y][start.x - 1].links.includes(directions.E), start.y, start.x, directions.W)
-    updateLinks(
-        start.x < map[0].length - 1 && map[start.y][start.x + 1].links.includes(directions.W),
-        start.y,
-        start.x,
-        directions.E
-    )
-    updateLinks(start.y > 0 && map[start.y - 1][start.x].links.includes(directions.S), start.y, start.x, directions.N)
-    updateLinks(
-        start.y < map.length - 1 && map[start.y + 1][start.x].links.includes(directions.N),
-        start.y,
-        start.x,
-        directions.S
-    )
+    updateLink(directions.E, directions.W, -1, 0)
+    updateLink(directions.W, directions.E, 1, 0)
+    updateLink(directions.S, directions.N, 0, -1)
+    updateLink(directions.N, directions.S, 0, 1)
 }
 
 const calculateShortestDistances = (map, start) => {
@@ -71,22 +70,15 @@ const calculateShortestDistances = (map, start) => {
     }
 }
 
-const parseGrid = (input) => {
-    return input.split('\n').map((row) => row.split(''))
-}
+const findMaxDistanceFromStart = (input) => {
+    const start = {}
 
-const generateMap = (grid, start) => {
-    return grid.map((row, y) =>
+    const grid = input.split('\n').map((row) => row.split(''))
+    const map = grid.map((row, y) =>
         row.map((direction, x) => ({
             links: getLinks(direction, x, y, start)
         }))
     )
-}
-
-const findMaxDistanceFromStart = (input) => {
-    const start = {}
-    const grid = parseGrid(input)
-    const map = generateMap(grid, start)
 
     updateLinksAroundPosition(map, start)
     calculateShortestDistances(map, start)
