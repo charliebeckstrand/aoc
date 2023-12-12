@@ -42,23 +42,24 @@ const calculateShortestDistances = (map, start) => {
     while (stack.length > 0) {
         const { position, distance } = stack.shift()
 
-        const tileAlreadyVisited =
-            map[position.y][position.x].distance !== undefined && map[position.y][position.x].distance <= distance
+        const currentTile = map[position.y][position.x]
+
+        const tileAlreadyVisited = currentTile.distance !== undefined && currentTile.distance <= distance
 
         if (tileAlreadyVisited) {
             continue
         }
 
-        map[position.y][position.x].distance = distance
-        map[position.y][position.x].links.forEach((direction) =>
+        currentTile.distance = distance
+
+        currentTile.links.forEach((direction) => {
+            const newPosition = { x: position.x + direction.x, y: position.y + direction.y }
+
             stack.push({
-                position: {
-                    x: position.x + direction.x,
-                    y: position.y + direction.y
-                },
+                position: newPosition,
                 distance: distance + 1
             })
-        )
+        })
     }
 }
 
