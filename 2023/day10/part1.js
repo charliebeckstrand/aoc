@@ -16,13 +16,15 @@ const connections = {
 }
 
 const updateNeighborLinks = (map, start) => {
-    const withinMap = (x, y) =>
-        start.x + x >= 0 && start.x + x < map[0].length && start.y + y >= 0 && start.y + y < map.length
+    const withinMap = (x, y) => x >= 0 && x < map[0].length && y >= 0 && y < map.length
 
     const updateLinks = (currentDirection, neighborDirection, x, y) => {
-        if (withinMap(x, y)) {
+        const neighborX = start.x + x
+        const neighborY = start.y + y
+
+        if (withinMap(neighborX, neighborY)) {
             const currentTile = map[start.y][start.x]
-            const neighborTile = map[start.y + y][start.x + x]
+            const neighborTile = map[neighborY][neighborX]
 
             if (neighborTile.links.includes(currentDirection)) {
                 currentTile.links.push(neighborDirection)
@@ -30,10 +32,16 @@ const updateNeighborLinks = (map, start) => {
         }
     }
 
-    updateLinks(directions.E, directions.W, -1, 0)
-    updateLinks(directions.W, directions.E, 1, 0)
-    updateLinks(directions.S, directions.N, 0, -1)
-    updateLinks(directions.N, directions.S, 0, 1)
+    const directionPairs = [
+        { current: directions.E, neighbor: directions.W, x: -1, y: 0 },
+        { current: directions.W, neighbor: directions.E, x: 1, y: 0 },
+        { current: directions.S, neighbor: directions.N, x: 0, y: -1 },
+        { current: directions.N, neighbor: directions.S, x: 0, y: 1 }
+    ]
+
+    directionPairs.forEach(({ current, neighbor, x, y }) => {
+        updateLinks(current, neighbor, x, y)
+    })
 }
 
 const calculateShortestDistances = (map, start) => {
