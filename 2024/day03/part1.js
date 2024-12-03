@@ -10,10 +10,8 @@ const extractMuls = () => {
 	// Multiply the two numbers
 	const products = pairs.map(([x, y]) => x * y)
 
-	// Sum the results
-	const result = products.reduce((acc, val) => acc + val, 0)
-
-	return result
+	// Sum and return the products
+	return products.reduce((acc, val) => acc + val, 0)
 }
 
 console.log(extractMuls())

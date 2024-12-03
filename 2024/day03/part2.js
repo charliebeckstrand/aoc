@@ -12,7 +12,7 @@ const extractMulsWithConditions = () => {
 	 * If the 'don't()' condition is enabled, skip the multiplication.
 	 * Return the sum.
 	 */
-	const { sum } = tokens.reduce(
+	return tokens.reduce(
 		(state, token) => {
 			if (token === 'do()') {
 				state.isEnabled = true
@@ -25,9 +25,7 @@ const extractMulsWithConditions = () => {
 			return state
 		},
 		{ isEnabled: true, sum: 0 }
-	)
-
-	return sum
+	).sum
 }
 
 console.log(extractMulsWithConditions())
