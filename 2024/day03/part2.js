@@ -4,24 +4,30 @@ const extractMulsWithConditions = () => {
 	// Find all instances of 'mul(x, y)', 'do()', and "don't()" in the program
 	const tokens = program.match(/mul\(\d+,\d+\)|do\(\)|don't\(\)/g) || []
 
-	// Initialize a flag to determine if the 'mul(x, y)' tokens should be processed
-	let isEnabled = true
+	/*
+	 * Iterate through the tokens in the program.
+	 * Use a state to keep track of the sum and whether the 'do()' condition is enabled.
+	 * The 'do()' condition is enabled by default.
+	 * If the 'do()' condition is enabled, multiply the two numbers and add the result to the sum.
+	 * If the 'don't()' condition is enabled, skip the multiplication.
+	 * Return the sum.
+	 */
+	const { sum } = tokens.reduce(
+		(state, token) => {
+			if (token === 'do()') {
+				state.isEnabled = true
+			} else if (token === "don't()") {
+				state.isEnabled = false
+			} else if (token.startsWith('mul') && state.isEnabled) {
+				const [_, x, y] = token.match(/mul\((\d+),(\d+)\)/)
+				state.sum += x * y // Update the sum if enabled
+			}
+			return state
+		},
+		{ isEnabled: true, sum: 0 }
+	)
 
-	// Iterate over the tokens and extract the two numbers from each 'mul(x, y)' token
-	return tokens.reduce((sum, token) => {
-		if (token === 'do()') {
-			isEnabled = true
-		} else if (token === "don't()") {
-			isEnabled = false
-		} else if (token.startsWith('mul') && isEnabled) {
-			// Extract the two numbers from the 'mul(x, y)' token
-			const [_, x, y] = token.match(/mul\((\d+),(\d+)\)/)
-
-			// Multiply the two numbers and add the product to the sum
-			return sum + x * y
-		}
-		return sum
-	}, 0)
+	return sum
 }
 
 console.log(extractMulsWithConditions())

@@ -11,7 +11,9 @@ const extractMuls = () => {
 	muls = muls.map((mul) => mul[0] * mul[1])
 
 	// Sum the results
-	return muls.reduce((acc, val) => acc + val, 0)
+	const result = muls.reduce((acc, val) => acc + val, 0)
+
+	return result
 }
 
 console.log(extractMuls())
