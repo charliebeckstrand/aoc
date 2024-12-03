@@ -19,8 +19,11 @@ const extractMulsWithConditions = () => {
 			} else if (token === "don't()") {
 				state.isEnabled = false
 			} else if (token.startsWith('mul') && state.isEnabled) {
+				// Extract the two numbers from the 'mul(x, y)' token
 				const [_, x, y] = token.match(/mul\((\d+),(\d+)\)/)
-				state.sum += x * y // Update the sum if enabled
+
+				// Multiply the two numbers and add the result to the sum
+				state.sum += x * y
 			}
 			return state
 		},
