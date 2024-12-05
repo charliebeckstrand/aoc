@@ -6,7 +6,7 @@ const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')
 // Convert rules into an array of [X, Y] pairs as numbers
 const rules = rulesSection.split('\n').map((rule) => rule.split('|').map(Number))
 
-// Convert updates into an array of page number arrays
+// Convert updates into an array of page numbers
 const updates = updatesSection.split('\n').map((update) => update.split(',').map(Number))
 
 // Function to validate if an update follows all applicable rules
