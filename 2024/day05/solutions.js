@@ -28,7 +28,10 @@ const topologicalSort = (update, rules) => {
 	// Filter rules that are applicable to the update (i.e. both pages are present)
 	const applicableRules = rules.filter(([x, y]) => update.includes(x) && update.includes(y))
 
+	// Initialize adjacency list with empty arrays for all pages
 	const adjacency = new Map(update.map((page) => [page, []]))
+
+	// Initialize inDegree of all pages to 0
 	const inDegree = new Map(update.map((page) => [page, 0]))
 
 	// Build the graph
@@ -39,6 +42,7 @@ const topologicalSort = (update, rules) => {
 
 	// Initialize queue with pages having inDegree 0
 	const queue = update.filter((page) => inDegree.get(page) === 0)
+
 	const sorted = []
 
 	/*
