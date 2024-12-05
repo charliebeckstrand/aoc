@@ -102,5 +102,6 @@ const sumInvalidMiddlePages = invalidUpdates.reduce((sum, update) => {
 	}
 }, 0)
 
-console.log(`Part 1: ${sumOfMiddlePages}`)
-console.log(`Part 2: ${sumInvalidMiddlePages}`)
+// Output the sum of middle pages for valid and invalid updates
+console.log(`Valid updates: ${sumOfMiddlePages}`)
+console.log(`Invalid updates: ${sumInvalidMiddlePages}`)
