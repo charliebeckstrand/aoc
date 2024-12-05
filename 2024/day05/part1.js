@@ -1,6 +1,6 @@
 import safetyManual from './input.js'
 
-// Parse the input into rules and updates
+// Parse the safety manual into rules and updates
 const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')
 
 // Convert rules into an array of [X, Y] page number pairs
