@@ -20,10 +20,7 @@ const findXmas = () => {
 		['Down-Left', { dx: 1, dy: -1 }]
 	])
 
-	/*
-	 * Iterate over each cell in the grid and check if the target is present in each direction.
-	 * Return the total number of occurrences.
-	 */
+	// Iterate over each cell in the grid and check if the target is present in each direction and return the total number of occurrences.
 	return Array.from({ length: rows * cols })
 		.map((_, i) => {
 			const row = Math.floor(i / cols)
@@ -31,9 +28,9 @@ const findXmas = () => {
 
 			/*
 			 * Count the number of directions in which the target is present.
-			 * Use the target length to determine the number of steps in each direction.
-			 * Filter out the directions where the target is not present and count the remaining directions.
-			 * Return the total count.
+			 * 1. Use the target length to determine the number of steps in each direction
+			 * 2. Filter out the directions where the target is not present and count the remaining directions
+			 * 3. Return the total count
 			 */
 			return Array.from(directions.values())
 				.map(({ dx, dy }) =>

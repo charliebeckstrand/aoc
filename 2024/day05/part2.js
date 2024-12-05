@@ -23,30 +23,33 @@ const isUpdateValid = (update, rules) => {
 		.every(([x, y]) => pageIndex.get(x) < pageIndex.get(y))
 }
 
-// Function to perform Topological Sort on an update based on the rules
+/*
+ * Function to perform Topological Sort on an update.
+ * 1. Filter rules that are applicable to the update
+ * 2. Initialize adjacency list with empty arrays for all pages
+ * 3. Initialize inDegree of all pages to 0
+ * 4. Build the graph
+ * 5. Initialize queue with pages having inDegree 0
+ * 6. Perform Topological Sort
+ * 7. Return the sorted list
+ */
 const topologicalSort = (update, rules) => {
-	// Filter rules that are applicable to the update (i.e. both pages are present)
 	const applicableRules = rules.filter(([x, y]) => update.includes(x) && update.includes(y))
 
-	// Initialize adjacency list with empty arrays for all pages
 	const adjacency = new Map(update.map((page) => [page, []]))
-
-	// Initialize inDegree of all pages to 0
 	const inDegree = new Map(update.map((page) => [page, 0]))
 
-	// Build the graph
 	for (const [x, y] of applicableRules) {
 		adjacency.get(x).push(y)
 		inDegree.set(y, inDegree.get(y) + 1)
 	}
 
-	// Initialize queue with pages having inDegree 0
 	const queue = update.filter((page) => inDegree.get(page) === 0)
 
 	const sorted = []
 
 	/*
-	 * Perform Topological Sort
+	 * Perform Topological Sort.
 	 * 1. Remove the current page from the queue
 	 * 2. Add the current page to the sorted list
 	 * 3. Decrement the inDegree of all neighbors
@@ -82,7 +85,7 @@ const { validUpdates, invalidUpdates } = updates.reduce(
 )
 
 /*
- * Process all updates to find valid ones and sum their middle pages
+ * Process all updates to find the sum of the middle pages.
  * 1. Perform Topological Sort on each valid update
  * 2. Extract the middle page from each update
  * 3. Sum all middle pages
@@ -102,6 +105,5 @@ const sumInvalidMiddlePages = invalidUpdates.reduce((sum, update) => {
 	}
 }, 0)
 
-// Output the sum of middle pages for valid and invalid updates
 console.log(`Valid updates: ${sumOfMiddlePages}`)
 console.log(`Invalid updates: ${sumInvalidMiddlePages}`)

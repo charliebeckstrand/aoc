@@ -24,7 +24,7 @@ const isUpdateValid = (update, rules) => {
 }
 
 /*
- * Process all updates to find valid ones and sum their middle pages
+ * Process all updates to find the sum of the middle pages.
  * 1. Filter updates based on the rules
  * 2. Extract the middle page from each update
  * 3. Sum all middle pages
