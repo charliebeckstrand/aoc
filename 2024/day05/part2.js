@@ -14,7 +14,7 @@ const isUpdateValid = (update, rules) => {
 	const pageIndex = new Map(update.map((page, idx) => [page, idx]))
 
 	/*
-	 * An update is valid if all rules are satisfied
+	 * An update is valid if:
 	 * 1. Both pages are present in the update
 	 * 2. The first page appears before the second page
 	 */

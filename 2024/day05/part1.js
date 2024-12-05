@@ -13,6 +13,11 @@ const updates = updatesSection.split('\n').map((update) => update.split(',').map
 const isUpdateValid = (update, rules) => {
 	const pageIndex = new Map(update.map((page, idx) => [page, idx]))
 
+	/*
+	 * An update is valid if:
+	 * 1. Both pages are present in the update
+	 * 2. The first page appears before the second page
+	 */
 	return rules
 		.filter(([x, y]) => pageIndex.has(x) && pageIndex.has(y))
 		.every(([x, y]) => pageIndex.get(x) < pageIndex.get(y))
