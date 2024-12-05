@@ -9,7 +9,7 @@ const rules = rulesSection.split('\n').map((rule) => rule.split('|').map(Number)
 // Convert updates into an array of page numbers
 const updates = updatesSection.split('\n').map((update) => update.split(',').map(Number))
 
-// Function to validate if an update follows all applicable rules
+// Validate if an update follows all applicable rules
 const isUpdateValid = (update, rules) => {
 	const pageIndex = new Map(update.map((page, idx) => [page, idx]))
 

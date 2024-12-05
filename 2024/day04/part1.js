@@ -5,10 +5,18 @@ const lines = grid.trim().split('\n')
 const rows = lines.length
 const cols = lines[0].length
 
+/*
+ * Find the number of valid 'XMAS' characters in all directions.
+ * 1. Define each direction as a pair of deltas (dx, dy)
+ * 2. Iterate over each cell in the grid and check if the target is present in each direction
+ * 3. Return the total number of occurrences
+ * 4. Use the target length to determine the number of steps in each direction
+ * 5. Filter out the directions where the target is not present and count the remaining directions
+ * 6. Return the total count
+ */
 const findXmas = () => {
 	const target = 'XMAS'
 
-	// Define each direction as a pair of deltas (dx, dy)
 	const directions = new Map([
 		['Right', { dx: 0, dy: 1 }],
 		['Down', { dx: 1, dy: 0 }],
@@ -20,7 +28,6 @@ const findXmas = () => {
 		['Down-Left', { dx: 1, dy: -1 }]
 	])
 
-	// Iterate over each cell in the grid and check if the target is present in each direction and return the total number of occurrences.
 	return Array.from({ length: rows * cols })
 		.map((_, i) => {
 			const row = Math.floor(i / cols)

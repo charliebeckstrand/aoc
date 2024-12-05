@@ -9,7 +9,7 @@ const rules = rulesSection.split('\n').map((rule) => rule.split('|').map(Number)
 // Convert updates into an array of page numbers
 const updates = updatesSection.split('\n').map((update) => update.split(',').map(Number))
 
-// Function to validate if an update follows all applicable rules
+// Validate if an update follows all applicable rules
 const isUpdateValid = (update, rules) => {
 	const pageIndex = new Map(update.map((page, idx) => [page, idx]))
 
@@ -24,7 +24,7 @@ const isUpdateValid = (update, rules) => {
 }
 
 /*
- * Function to perform Topological Sort on an update.
+ * Perform Topological Sort on an update.
  * 1. Filter rules that are applicable to the update
  * 2. Initialize adjacency list with empty arrays for all pages
  * 3. Initialize inDegree of all pages to 0

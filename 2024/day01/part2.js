@@ -4,13 +4,13 @@ const left = []
 const right = []
 
 /*
- * Get the sum of the differences between the lists.
+ * Get the sum of the products of the similarities between the lists.
  * 1. Split the lists
  * 2. Sort the lists
  * 3. Check how many times each element in the left list appears in the right list
  * 4. Return the sum of the products
  */
-const getDifferences = () => {
+const getSimilarity = () => {
 	lists.split('\n').forEach((line) => {
 		const [l, r] = line.split('   ')
 		left.push(+l)
@@ -25,4 +25,4 @@ const getDifferences = () => {
 	console.log(similarity)
 }
 
-console.log(getDifferences())
+console.log(getSimilarity())
