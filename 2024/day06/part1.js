@@ -10,31 +10,47 @@ const directions = new Map([
 ])
 
 /*
+ * Find the position of the guard in the map.
+ * Return the row and column index of the guard.
+ */
+const findGuardPosition = (map) => {
+	for (let rowIndex = 0; rowIndex < map.length; rowIndex++) {
+		const colIndex = map[rowIndex].indexOf('^')
+
+		if (colIndex !== -1) {
+			return { row: rowIndex, col: colIndex }
+		}
+	}
+
+	return null
+}
+
+/*
  * Predict the path of the guard based on the current direction.
- * The guard will move in the following order: up, right, down, left.
- * The guard will change direction when it hits a wall.
- * The guard will stop when it visits a space it has visited before.
- * Return the number of unique spaces visited by the guard.
+ * Return the number of unique positions visited by the guard.
+ * The guard moves in the following way:
+ * 1. If the guard hits a wall, change the direction
+ * 2. If the guard can move forward, update the position
+ * 3. If the guard has visited a space before, stop
  */
 const predictPath = () => {
-	// Initialize the guard's position and direction
+	const visited = new Set()
+
+	// Initialize the guard with the starting direction and position
 	const guard = {
 		direction: 'up',
 		position: { row: 0, col: 0 }
 	}
 
-	// Keep track of the visited spaces
-	const visited = new Set()
+	// Find the starting position of the guard
+	const guardPosition = findGuardPosition(map)
 
-	// Find the starting position of the guard on the map and replace it with a dot
-	map.forEach((row, rowIndex) => {
-		const colIndex = row.indexOf('^')
-
-		if (colIndex !== -1) {
-			guard.position = { row: rowIndex, col: colIndex }
-			map[rowIndex][colIndex] = '.'
-		}
-	})
+	// If the guard is found, update the guard's position and the map
+	if (guardPosition) {
+		const { row, col } = guardPosition
+		guard.position = { row, col }
+		map[row][col] = '.'
+	}
 
 	// Get the next direction based on the current direction
 	const getNextDirection = (currentDirection) => {
@@ -46,9 +62,9 @@ const predictPath = () => {
 
 	/*
 	 * Follow the path until the guard can't move anymore.
-	 * 1. If the guard hits a wall, change the direction.
-	 * 2. If the guard can move forward, update the position.
-	 * 3. If the guard has visited a space before, stop.
+	 * Update the guard's position and direction based on the map.
+	 * Keep track of the visited positions by the guard.
+	 * Stop if the guard has visited a position before.
 	 */
 	while (true) {
 		visited.add(`${guard.position.row},${guard.position.col}`)
