@@ -10,7 +10,7 @@ const directions = new Map([
 ])
 
 /*
- * Find the position of the guard in the map.
+ * Find the position of the guard on the map.
  * Return the row and column index of the guard.
  */
 const findGuardPosition = (map) => {
