@@ -1,5 +1,5 @@
 /*
-	Predict the path of the guard in the map
+	Predict the path of the guard.
 	- The guard starts at the '^' symbol
 	- The guard moves in the direction it is facing
 	- If the guard hits a wall ('#'), it turns right

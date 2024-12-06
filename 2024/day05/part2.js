@@ -1,5 +1,5 @@
 /*
-	Parse the safety manual to find the sum of the middle pages
+	Parse the safety manual to find the sum of the middle pages.
 	- The safety manual is divided into two sections: rules and updates
 	- The rules section contains pairs of page numbers separated by '|'
 	- The updates section contains page numbers separated by ','
