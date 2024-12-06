@@ -48,7 +48,9 @@ const predictPath = () => {
 		const newRow = guard.position.row + dr
 		const newCol = guard.position.col + dc
 
-		if (newRow < 0 || newRow >= map.length || newCol < 0 || newCol >= map[0].length) break
+		if (newRow < 0 || newRow >= map.length || newCol < 0 || newCol >= map[0].length) {
+			break
+		}
 
 		if (map[newRow][newCol] === '#') {
 			guard.direction = getNextDirection(guard.direction)
