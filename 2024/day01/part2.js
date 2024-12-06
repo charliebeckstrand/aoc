@@ -1,11 +1,11 @@
-import lists from './input.js'
-
 /*
 	Find the sum of the products of the similarities between the lists.
 	- The lists contain integers
 	- The lists are split by a tab character
 	- Return the sum of the products of the similarities between the lists
 */
+
+import lists from './input.js'
 
 const left = []
 const right = []

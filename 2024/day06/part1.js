@@ -1,5 +1,3 @@
-import grid from './input.js'
-
 /*
 	Predict the path of the guard in the map
 	- The guard starts at the '^' symbol
@@ -9,6 +7,8 @@ import grid from './input.js'
 	- The guard stops when it reaches the edge of the map or when it revisits a cell
 	- Return the number of cells visited by the guard
 */
+
+import grid from './input.js'
 
 const map = grid.split('\n').map((row) => row.split(''))
 

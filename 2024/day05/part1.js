@@ -1,5 +1,3 @@
-import safetyManual from './input.js'
-
 /*
 	Parse the safety manual to find the sum of the middle pages
 	- The safety manual is divided into two sections: rules and updates
@@ -9,6 +7,8 @@ import safetyManual from './input.js'
 	- An update is invalid if it violates any rule
 	- Return the sum of the middle pages of all valid updates
 */
+
+import safetyManual from './input.js'
 
 const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')
 

@@ -1,9 +1,3 @@
-import grid from './input.js'
-
-const lines = grid.trim().split('\n')
-const rows = lines.length
-const cols = lines[0].length
-
 /*
 	Find the number of valid 'XMAS' characters in all directions.
 	- The grid is divided into rows and columns
@@ -11,6 +5,12 @@ const cols = lines[0].length
 	- The 'XMAS' characters are present in all directions
 	- Return the total count of 'XMAS' characters in all directions
 */
+
+import grid from './input.js'
+
+const lines = grid.trim().split('\n')
+const rows = lines.length
+const cols = lines[0].length
 
 const findXmas = () => {
 	const target = 'XMAS'

@@ -1,5 +1,3 @@
-import grid from './input.js'
-
 /*
 	Find the number of valid 'A' characters surrounded by 'M' and 'S' diagonally.
 	- The grid is divided into rows and columns
@@ -8,6 +6,8 @@ import grid from './input.js'
 	- The 'A' characters are surrounded by 'M' and 'S' diagonally
 	- Return the total count of valid 'A' characters
 */
+
+import grid from './input.js'
 
 const lines = grid.trim().split('\n')
 const rows = lines.length

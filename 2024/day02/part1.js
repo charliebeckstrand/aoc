@@ -1,5 +1,3 @@
-import reports from './input.js'
-
 /*
 	Find the number of safe reports.
 	- The reports contain a series of levels
@@ -7,6 +5,8 @@ import reports from './input.js'
 	- The levels are safe if the difference between them is 1 or 3
 	- Return the total count of safe reports
 */
+
+import reports from './input.js'
 
 const isSafe = (levels) => {
 	const diffs = levels.slice(1).map((level, i) => level - levels[i])

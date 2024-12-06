@@ -1,5 +1,3 @@
-import program from './input.js'
-
 /*
 	Extract the sum of all products from the program with conditions.
 	- The program contains a series of 'mul' operations
@@ -7,6 +5,8 @@ import program from './input.js'
 	- The 'do' and "don't" operations enable and disable the 'mul' operation
 	- Return the sum of all products from the program with conditions
 */
+
+import program from './input.js'
 
 const extractMulsWithConditions = () => {
 	const tokens = program.match(/mul\(\d+,\d+\)|do\(\)|don't\(\)/g) || []
