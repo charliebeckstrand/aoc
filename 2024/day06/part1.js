@@ -17,10 +17,7 @@ const predictPath = () => {
 
 	const visited = new Set()
 
-	/*
-	 * Find the starting position of the guard.
-	 * Replace the guard's position with a dot.
-	 */
+	// Find the starting position of the guard on the map and replace it with a dot
 	map.forEach((row, rowIndex) => {
 		const colIndex = row.indexOf('^')
 
@@ -30,7 +27,7 @@ const predictPath = () => {
 		}
 	})
 
-	// Get the next direction based on the current direction.
+	// Get the next direction based on the current direction
 	const getNextDirection = (currentDirection) => {
 		const directionsArray = [...directions.keys()]
 		const nextIndex = (directionsArray.indexOf(currentDirection) + 1) % directionsArray.length
@@ -39,8 +36,10 @@ const predictPath = () => {
 	}
 
 	/*
-	 * Follow the path until we hit a wall.
-	 * If we hit a wall, change direction.
+	 * Follow the path until the guard can't move anymore.
+	 * 1. If the guard hits a wall, change the direction.
+	 * 2. If the guard can move forward, update the position.
+	 * 3. If the guard has visited a space before, stop.
 	 */
 	while (true) {
 		visited.add(`${guard.position.row},${guard.position.col}`)
