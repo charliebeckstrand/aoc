@@ -9,12 +9,21 @@ const directions = new Map([
 	['left', [0, -1]]
 ])
 
+/*
+ * Predict the path of the guard based on the current direction.
+ * The guard will move in the following order: up, right, down, left.
+ * The guard will change direction when it hits a wall.
+ * The guard will stop when it visits a space it has visited before.
+ * Return the number of unique spaces visited by the guard.
+ */
 const predictPath = () => {
+	// Initialize the guard's position and direction
 	const guard = {
 		direction: 'up',
 		position: { row: 0, col: 0 }
 	}
 
+	// Keep track of the visited spaces
 	const visited = new Set()
 
 	// Find the starting position of the guard on the map and replace it with a dot
