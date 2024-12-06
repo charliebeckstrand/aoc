@@ -1,23 +1,19 @@
 import reports from './input.js'
 
 /*
- * Check if the levels in the report are safe.
- * 1. Remove the first level (0) and map the differences between levels
- * 2. Check if the differences are in the range of 1 to 3 or -3 to -1
- */
+	Find the number of safe reports.
+	- The reports contain a series of levels
+	- The levels are integers
+	- The levels are safe if the difference between them is 1 or 3
+	- Return the total count of safe reports
+*/
+
 const isSafe = (levels) => {
 	const diffs = levels.slice(1).map((level, i) => level - levels[i])
 
 	return diffs.every((diff) => diff >= 1 && diff <= 3) || diffs.every((diff) => diff >= -3 && diff <= -1)
 }
 
-/*
- * Filter out the safe reports and count them.
- * 1. Convert the report to an array of numbers
- * 2. Check if the report is safe
- * 3. Filter out the safe reports
- * 4. Count the safe reports
- */
 const safeReports = reports.filter((report) => {
 	const levels = report.split(' ').map(Number)
 

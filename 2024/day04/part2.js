@@ -1,22 +1,20 @@
 import grid from './input.js'
 
-// Split the grid into lines, rows, and columns
+/*
+	Find the number of valid 'A' characters surrounded by 'M' and 'S' diagonally.
+	- The grid is divided into rows and columns
+	- The 'A' characters are present in the grid
+	- The 'M' and 'S' characters are present in the grid
+	- The 'A' characters are surrounded by 'M' and 'S' diagonally
+	- Return the total count of valid 'A' characters
+*/
+
 const lines = grid.trim().split('\n')
 const rows = lines.length
 const cols = lines[0].length
 
-// Check if the two characters are valid
 const isValid = (a, b) => (a === 'M' && b === 'S') || (a === 'S' && b === 'M')
 
-/*
- * Find the number of valid 'A' characters surrounded by 'M' and 'S' diagonally.
- * 1. Split the line into characters
- * 2. Remove the first and last characters
- * 3. Iterate over each character and check if it is 'A'
- * 4. Get the four diagonal characters
- * 5. Check if the diagonal characters are valid
- * 6. Return the total count
- */
 const findXmas = () =>
 	lines.slice(1, rows - 1).reduce((totalCount, line, i) => {
 		const row = i + 1

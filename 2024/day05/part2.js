@@ -1,38 +1,27 @@
 import safetyManual from './input.js'
 
-// Parse the safety manual into rules and updates
+/*
+	Parse the safety manual to find the sum of the middle pages
+	- The safety manual is divided into two sections: rules and updates
+	- The rules section contains pairs of page numbers separated by '|'
+	- The updates section contains page numbers separated by ','
+	- Perform Topological Sort on each update to find the middle page
+	- Return the sum of the middle pages of all valid updates
+*/
+
 const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')
 
-// Convert rules into an array of [X, Y] page number pairs
 const rules = rulesSection.split('\n').map((rule) => rule.split('|').map(Number))
-
-// Convert updates into an array of page numbers
 const updates = updatesSection.split('\n').map((update) => update.split(',').map(Number))
 
-// Validate if an update follows all applicable rules
 const isUpdateValid = (update, rules) => {
 	const pageIndex = new Map(update.map((page, idx) => [page, idx]))
 
-	/*
-	 * An update is valid if:
-	 * 1. Both pages are present in the update
-	 * 2. The first page appears before the second page
-	 */
 	return rules
 		.filter(([x, y]) => pageIndex.has(x) && pageIndex.has(y))
 		.every(([x, y]) => pageIndex.get(x) < pageIndex.get(y))
 }
 
-/*
- * Perform Topological Sort on an update.
- * 1. Filter rules that are applicable to the update
- * 2. Initialize adjacency list with empty arrays for all pages
- * 3. Initialize inDegree of all pages to 0
- * 4. Build the graph
- * 5. Initialize queue with pages having inDegree 0
- * 6. Perform Topological Sort
- * 7. Return the sorted list
- */
 const topologicalSort = (update, rules) => {
 	const applicableRules = rules.filter(([x, y]) => update.includes(x) && update.includes(y))
 
@@ -48,14 +37,6 @@ const topologicalSort = (update, rules) => {
 
 	const sorted = []
 
-	/*
-	 * Perform Topological Sort.
-	 * 1. Remove the current page from the queue
-	 * 2. Add the current page to the sorted list
-	 * 3. Decrement the inDegree of all neighbors
-	 * 4. If the inDegree of a neighbor becomes 0, add it to the queue
-	 * 5. Repeat until the queue is empty
-	 */
 	while (queue.length > 0) {
 		const current = queue.shift()
 
@@ -67,7 +48,6 @@ const topologicalSort = (update, rules) => {
 		}
 	}
 
-	// If the sorted list is shorter than the update, there is a cycle in the graph and the update is invalid
 	if (sorted.length !== update.length) {
 		throw new Error(`Cannot perform topological sort on update: ${update.join(',')}`)
 	}
@@ -75,7 +55,6 @@ const topologicalSort = (update, rules) => {
 	return sorted
 }
 
-// Separate updates into valid and invalid
 const { validUpdates, invalidUpdates } = updates.reduce(
 	(acc, update) => {
 		isUpdateValid(update, rules) ? acc.validUpdates.push(update) : acc.invalidUpdates.push(update)
@@ -84,17 +63,10 @@ const { validUpdates, invalidUpdates } = updates.reduce(
 	{ validUpdates: [], invalidUpdates: [] }
 )
 
-/*
- * Process all updates to find the sum of the middle pages.
- * 1. Perform Topological Sort on each valid update
- * 2. Extract the middle page from each update
- * 3. Sum all middle pages
- */
 const sumOfMiddlePages = validUpdates
 	.map((update) => topologicalSort(update, rules)[Math.floor(update.length / 2)])
 	.reduce((sum, page) => sum + page, 0)
 
-// Reorder invalid updates and sum their middle pages
 const sumInvalidMiddlePages = invalidUpdates.reduce((sum, update) => {
 	try {
 		const sorted = topologicalSort(update, rules)
