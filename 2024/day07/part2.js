@@ -2,15 +2,6 @@ import calibrations from './input.js'
 
 const operators = ['+', '*', '||']
 
-const generateOperatorCombinations = (n) => {
-	return [...Array(n)].reduce(
-		(accumulator, _) => {
-			return accumulator.flatMap((sequence) => operators.map((operator) => [...sequence, operator]))
-		},
-		[[]]
-	)
-}
-
 const operatorResolver = (operator) => {
 	switch (operator) {
 		case '+':
@@ -28,6 +19,15 @@ const applyOperators = (numbers, operators) =>
 
 		return operation(result, numbers[index + 1])
 	}, numbers[0])
+
+const generateOperatorCombinations = (n) => {
+	return [...Array(n)].reduce(
+		(accumulator, _) => {
+			return accumulator.flatMap((sequence) => operators.map((operator) => [...sequence, operator]))
+		},
+		[[]]
+	)
+}
 
 const isValidCalibration = (target, numbers, generateOperatorCombinations, applyOperators) => {
 	const operatorCombinations = generateOperatorCombinations(numbers.length - 1)
