@@ -24,8 +24,6 @@ const applyOperators = (numbers, operators) =>
 	operators.reduce((result, operator, index) => {
 		const operation = operatorResolver(operator)
 
-		if (!operation) throw new Error(`Unknown operator: ${operator}`)
-
 		return operation(result, numbers[index + 1])
 	}, numbers[0])
 
