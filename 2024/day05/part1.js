@@ -1,13 +1,3 @@
-/*
-	Parse the safety manual to find the sum of the middle pages.
-	- The safety manual is divided into two sections: rules and updates
-	- The rules section contains pairs of page numbers separated by '|'
-	- The updates section contains page numbers separated by ','
-	- An update is valid if it follows all applicable rules
-	- An update is invalid if it violates any rule
-	- Return the sum of the middle pages of all valid updates
-*/
-
 import safetyManual from './input.js'
 
 const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')

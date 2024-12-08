@@ -1,10 +1,3 @@
-/*
-	Extract the sum of all products from the program.
-	- The program contains a series of 'mul' operations
-	- The 'mul' operation multiplies two numbers
-	- Return the sum of all products from the program
-*/
-
 import program from './input.js'
 
 const extractMuls = () => {

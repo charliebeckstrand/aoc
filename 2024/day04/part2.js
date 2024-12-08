@@ -1,17 +1,7 @@
-/*
-	Find the number of valid 'A' characters surrounded by 'M' and 'S' diagonally.
-	- The grid is divided into rows and columns
-	- The 'A' characters are present in the grid
-	- The 'M' and 'S' characters are present in the grid
-	- The 'A' characters are surrounded by 'M' and 'S' diagonally
-	- Return the total count of valid 'A' characters
-*/
-
 import grid from './input.js'
 
 const lines = grid.trim().split('\n')
-const rows = lines.length
-const cols = lines[0].length
+const [rows, cols] = [lines.length, lines[0].length]
 
 const isValid = (a, b) => (a === 'M' && b === 'S') || (a === 'S' && b === 'M')
 
@@ -36,6 +26,7 @@ const findXmas = () =>
 				}
 				return count
 			}, 0)
+
 		return totalCount + lineCount
 	}, 0)
 

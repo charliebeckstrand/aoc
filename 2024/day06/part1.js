@@ -1,13 +1,3 @@
-/*
-	Predict the path of the guard.
-	- The guard starts at the '^' symbol
-	- The guard moves in the direction it is facing
-	- If the guard hits a wall ('#'), it turns right
-	- If the guard hits an empty space ('.'), it moves forward
-	- The guard stops when it reaches the edge of the map or when it revisits a cell
-	- Return the number of cells visited by the guard
-*/
-
 import grid from './input.js'
 
 const map = grid.split('\n').map((row) => row.split(''))
@@ -19,7 +9,12 @@ const directions = new Map([
 	['left', [0, -1]]
 ])
 
-const findGuardPosition = (map) => {
+const guard = {
+	direction: 'up',
+	position: { row: 0, col: 0 }
+}
+
+const findGuardPosition = () => {
 	for (let rowIndex = 0; rowIndex < map.length; rowIndex++) {
 		const colIndex = map[rowIndex].indexOf('^')
 
@@ -31,31 +26,30 @@ const findGuardPosition = (map) => {
 	return null
 }
 
-const predictPath = () => {
-	const visited = new Set()
-
-	const guard = {
-		direction: 'up',
-		position: { row: 0, col: 0 }
-	}
-
-	const guardPosition = findGuardPosition(map)
-
+const setGuardPosition = (guard, guardPosition) => {
 	if (guardPosition) {
 		const { row, col } = guardPosition
+
 		guard.position = { row, col }
+
 		map[row][col] = '.'
 	}
+}
 
-	const getNextDirection = (currentDirection) => {
-		const directionsArray = [...directions.keys()]
-		const nextIndex = (directionsArray.indexOf(currentDirection) + 1) % directionsArray.length
+const getNextDirection = (currentDirection, directionsArray) => {
+	const currentIndex = directionsArray.indexOf(currentDirection)
+	const nextIndex = (currentIndex + 1) % directionsArray.length
 
-		return directionsArray[nextIndex]
-	}
+	return directionsArray[nextIndex]
+}
+
+const moveGuard = (guard, directions, visited) => {
+	const directionsArray = Array.from(directions.keys())
 
 	while (true) {
-		visited.add(`${guard.position.row},${guard.position.col}`)
+		const positionKey = `${guard.position.row},${guard.position.col}`
+
+		visited.add(positionKey)
 
 		const [dr, dc] = directions.get(guard.direction)
 
@@ -67,11 +61,19 @@ const predictPath = () => {
 		}
 
 		if (map[newRow][newCol] === '#') {
-			guard.direction = getNextDirection(guard.direction)
+			guard.direction = getNextDirection(guard.direction, directionsArray)
 		} else {
 			guard.position = { row: newRow, col: newCol }
 		}
 	}
+}
+
+const predictPath = () => {
+	const visited = new Set()
+
+	setGuardPosition(guard, findGuardPosition())
+
+	moveGuard(guard, directions, visited)
 
 	return visited.size
 }

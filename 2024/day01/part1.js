@@ -1,28 +1,25 @@
-/*
-	Find the sum of the differences between the lists.
-	- The lists contain integers
-	- The lists are split by a tab character
-	- Return the sum of the differences between the lists
-*/
-
 import lists from './input.js'
 
-const left = []
-const right = []
+const parseAndSortLists = () => {
+	const pairs = lists
+		.trim()
+		.split('\n')
+		.filter((line) => line.trim() !== '')
+		.map((line) => line.split(/\s{3,}/).map(Number))
 
-lists.split('\n').forEach((line) => {
-	const [l, r] = line.split('   ')
-	left.push(+l)
-	right.push(+r)
-})
+	const left = pairs.map(([l]) => l).sort((a, b) => a - b)
+	const right = pairs.map(([, r]) => r).sort((a, b) => a - b)
 
-left.sort((a, b) => a - b)
-right.sort((a, b) => a - b)
-
-const getDifferences = () => {
-	const differences = left.map((l, i) => Math.abs(l - right[i]))
-
-	return differences.reduce((a, b) => a + b, 0)
+	return { left, right }
 }
 
+const { left, right } = parseAndSortLists()
+
+const calculateSumOfDifferences = (left, right) => {
+	return left.reduce((sum, value, index) => sum + Math.abs(value - right[index]), 0)
+}
+
+const getDifferences = () => calculateSumOfDifferences(left, right)
+
+// Output the result
 console.log(getDifferences())

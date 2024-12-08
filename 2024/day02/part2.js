@@ -1,12 +1,3 @@
-/*
-	Find the number of safe reports with a problem dampener.
-	- The reports contain a series of levels
-	- The levels are integers
-	- The levels are safe if the difference between them is 1 or 3
-	- The levels can be made safe by removing one level
-	- Return the total count of safe reports
-*/
-
 import reports from './input.js'
 
 const isSafe = (levels) => {

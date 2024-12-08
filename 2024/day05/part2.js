@@ -1,12 +1,3 @@
-/*
-	Parse the safety manual to find the sum of the middle pages.
-	- The safety manual is divided into two sections: rules and updates
-	- The rules section contains pairs of page numbers separated by '|'
-	- The updates section contains page numbers separated by ','
-	- Perform Topological Sort on each update to find the middle page
-	- Return the sum of the middle pages of all valid updates
-*/
-
 import safetyManual from './input.js'
 
 const [rulesSection, updatesSection] = safetyManual.trim().split('\n\n')
@@ -30,6 +21,7 @@ const topologicalSort = (update, rules) => {
 
 	for (const [x, y] of applicableRules) {
 		adjacency.get(x).push(y)
+
 		inDegree.set(y, inDegree.get(y) + 1)
 	}
 
@@ -44,6 +36,7 @@ const topologicalSort = (update, rules) => {
 
 		for (const neighbor of adjacency.get(current)) {
 			inDegree.set(neighbor, inDegree.get(neighbor) - 1)
+
 			if (inDegree.get(neighbor) === 0) queue.push(neighbor)
 		}
 	}
@@ -58,6 +51,7 @@ const topologicalSort = (update, rules) => {
 const { validUpdates, invalidUpdates } = updates.reduce(
 	(acc, update) => {
 		isUpdateValid(update, rules) ? acc.validUpdates.push(update) : acc.invalidUpdates.push(update)
+
 		return acc
 	},
 	{ validUpdates: [], invalidUpdates: [] }
@@ -70,9 +64,11 @@ const sumOfMiddlePages = validUpdates
 const sumInvalidMiddlePages = invalidUpdates.reduce((sum, update) => {
 	try {
 		const sorted = topologicalSort(update, rules)
+
 		return sum + sorted[Math.floor(sorted.length / 2)]
 	} catch (error) {
 		console.error(`Error sorting update ${update}: ${error.message}`)
+
 		return sum
 	}
 }, 0)
