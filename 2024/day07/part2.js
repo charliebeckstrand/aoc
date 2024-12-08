@@ -37,26 +37,26 @@ const isValidCalibration = (target, numbers, generateOperatorCombinations, apply
 	return operatorCombinations.some((operators) => applyOperators(numbers, operators) === target)
 }
 
-const getTotal = (calibration) => {
+const getTestValue = (calibration) => {
 	const [value] = calibration.split(':').map((str) => str.trim())
 
 	return Number(value)
 }
 
 const parseNumbers = (calibration) => {
-	const [, equations] = calibration.split(':').map((str) => str.trim())
+	const [_, equations] = calibration.split(':').map((str) => str.trim())
 
 	return equations.split(' ').map(Number)
 }
 
 const getCalibrationTotal = () =>
 	calibrations.reduce((acc, calibration) => {
-		const total = getTotal(calibration)
+		const testValue = getTestValue(calibration)
 		const numbers = parseNumbers(calibration)
 
-		const isValid = isValidCalibration(total, numbers, generateOperatorCombinations, applyOperators)
+		const isValid = isValidCalibration(testValue, numbers, generateOperatorCombinations, applyOperators)
 
-		return isValid ? acc + total : acc
+		return isValid ? acc + testValue : acc
 	}, 0)
 
 console.log(getCalibrationTotal())
