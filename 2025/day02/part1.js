@@ -12,7 +12,7 @@ const sumInvalidIds = (ids) => {
 	}
 
 	return Array.from(generateIds())
-		.filter((num) => /^(.+)\1$/.test(num.toString()))
+		.filter((num) => /^(.+)\1$/.test(num))
 		.reduce((sum, num) => sum + num, 0)
 }
 
