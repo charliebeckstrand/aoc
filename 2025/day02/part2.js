@@ -2,8 +2,8 @@ import ids from './input.js'
 
 const sumInvalidIds = (ids) => {
 	function* generateIds() {
-		for (const id of ids) {
-			const [first, last] = id.split('-').map(Number)
+		for (const range of ids) {
+			const [first, last] = range.split('-').map(Number)
 
 			for (let i = first; i <= last; i++) {
 				yield i
