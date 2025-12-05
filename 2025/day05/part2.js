@@ -7,17 +7,17 @@ const [ranges] = input
 
 const sorted = ranges.map((range) => range.split('-').map(Number)).sort(([a], [b]) => a - b)
 
-const coalesced = sorted.reduce((acc, [start, end]) => {
-	const last = acc.at(-1)
+const coalesced = []
 
-	if (!last || start > last[1] + 1) {
-		acc.push([start, end])
+for (const [start, end] of sorted) {
+	const previous = coalesced[coalesced.length - 1]
+
+	if (!previous || start > previous[1] + 1) {
+		coalesced.push([start, end])
 	} else {
-		last[1] = Math.max(last[1], end)
+		previous[1] = Math.max(previous[1], end)
 	}
-
-	return acc
-}, [])
+}
 
 const result = coalesced.reduce((sum, [start, end]) => {
 	const count = end - start + 1
