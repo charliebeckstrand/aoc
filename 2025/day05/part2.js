@@ -9,7 +9,7 @@ const sorted = ranges.map((range) => range.split('-').map(Number)).sort(([a], [b
 
 const coalesced = []
 
-for (const [start, end] of sorted) {
+sorted.forEach(([start, end]) => {
 	const previous = coalesced[coalesced.length - 1]
 
 	if (!previous || start > previous[1] + 1) {
@@ -17,7 +17,7 @@ for (const [start, end] of sorted) {
 	} else {
 		previous[1] = Math.max(previous[1], end)
 	}
-}
+})
 
 const result = coalesced.reduce((sum, [start, end]) => {
 	const count = end - start + 1
