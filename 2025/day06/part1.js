@@ -1,10 +1,10 @@
 import input from './input.js'
 
-const OPERATORS = new Set(['+', '*'])
-
 const [rows, cols] = ((rows) => [rows, Math.max(...rows.map((row) => row.length))])(
 	input.map((line) => line.trim().split(/\s+/))
 )
+
+const OPERATORS = new Set(['+', '*'])
 
 const problems = (rows, cols) =>
 	Array.from({ length: cols }, (_, col) => rows.map((row) => row[col])).map((cells) => {
