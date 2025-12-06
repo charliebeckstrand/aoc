@@ -7,14 +7,14 @@ const [rows, cols] = ((rows) => [rows, Math.max(...rows.map((row) => row.length)
 )
 
 const problems = (rows, cols) =>
-	Array.from({ length: cols }, (_, col) => rows.map((row) => row[col])).map((tokens) => {
-		const numbers = tokens.filter((token) => !OPERATORS.has(token)).map(Number)
-		const operator = tokens.find((token) => OPERATORS.has(token)) ?? null
+	Array.from({ length: cols }, (_, col) => rows.map((row) => row[col])).map((cells) => {
+		const operator = cells.find((cell) => OPERATORS.has(cell)) ?? null
+		const numbers = cells.filter((cell) => !OPERATORS.has(cell)).map(Number)
 
-		return { numbers, operator }
+		return { operator, numbers }
 	})
 
-const evaluateProblem = ({ numbers, operator }) =>
+const evaluateProblem = ({ operator, numbers }) =>
 	operator === '+' ? numbers.reduce((a, b) => a + b, 0) : operator === '*' ? numbers.reduce((a, b) => a * b, 1) : null
 
 const total = problems(rows, cols).reduce((sum, problem) => sum + evaluateProblem(problem), 0)
