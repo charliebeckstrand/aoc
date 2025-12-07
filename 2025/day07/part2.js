@@ -8,6 +8,8 @@ const start = manifold.map((line, row) => ({ row, col: line.indexOf('S') })).fin
 
 const cache = new Map()
 
+const inbounds = (row, col) => row >= 0 && row < height && col >= 0 && col < width
+
 const visited = (key, compute) => {
 	if (cache.has(key)) return cache.get(key)
 
@@ -17,8 +19,6 @@ const visited = (key, compute) => {
 
 	return value
 }
-
-const inbounds = (row, col) => row >= 0 && row < height && col >= 0 && col < width
 
 const timelines = (row, col) => {
 	if (!inbounds(row, col)) return BigInt(0)
