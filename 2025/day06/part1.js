@@ -4,12 +4,12 @@ const [rows, cols] = ((rows) => [rows, Math.max(...rows.map((row) => row.length)
 	input.map((line) => line.trim().split(/\s+/))
 )
 
-const OPERATORS = new Set(['+', '*'])
+const operators = new Set(['+', '*'])
 
 const problems = (rows, cols) =>
 	Array.from({ length: cols }, (_, col) => rows.map((row) => row[col])).map((cells) => {
-		const operator = cells.find((cell) => OPERATORS.has(cell)) ?? null
-		const numbers = cells.filter((cell) => !OPERATORS.has(cell)).map(Number)
+		const operator = cells.find((cell) => operators.has(cell)) ?? null
+		const numbers = cells.filter((cell) => !operators.has(cell)).map(Number)
 
 		return { operator, numbers }
 	})
