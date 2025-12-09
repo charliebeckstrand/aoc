@@ -1,4 +1,3 @@
-import util from 'node:util'
 import input from './input.js'
 
 const coordinates = input.map((line) => line.split(',').map(Number))
