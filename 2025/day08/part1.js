@@ -25,7 +25,7 @@ for (const { pair } of distances.slice(0, 1000)) {
 	circuits.delete(key2)
 }
 
-const circuitSizes = Array.from(circuits.values()).map((set) => set.size)
+const circuitSizes = [...circuits.values()].map((set) => set.size)
 
 circuitSizes.sort((a, b) => b - a)
 
