@@ -1,3 +1,4 @@
+import util from 'node:util'
 import input from './input.js'
 
 const coordinates = input.map((line) => line.split(',').map(Number))
@@ -13,19 +14,19 @@ const distances = coordinates.flatMap((first, from) =>
 
 distances.sort((a, b) => a.distance - b.distance)
 
-const groups = new Map(coordinates.map((_, i) => [i, new Set([i])]))
+const circuits = new Map(coordinates.map((_, i) => [i, new Set([i])]))
 
 for (const { pair } of distances.slice(0, 1000)) {
-	const [key1, key2] = pair.map((index) => [...groups.keys()].find((key) => groups.get(key).has(index)))
+	const [key1, key2] = pair.map((index) => [...circuits.keys()].find((key) => circuits.get(key).has(index)))
 
 	if (key1 === key2) continue
 
-	groups.set(key1, new Set([...groups.get(key1), ...groups.get(key2)]))
+	circuits.set(key1, new Set([...circuits.get(key1), ...circuits.get(key2)]))
 
-	groups.delete(key2)
+	circuits.delete(key2)
 }
 
-const sizes = Array.from(groups.values()).map((set) => set.size)
+const sizes = Array.from(circuits.values()).map((set) => set.size)
 
 const product = sizes
 	.sort((a, b) => b - a)
