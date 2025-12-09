@@ -25,10 +25,12 @@ for (const { pair } of distances.slice(0, 1000)) {
 	circuits.delete(key2)
 }
 
-const sizes = Array.from(circuits.values())
-	.map((set) => set.size)
-	.sort((a, b) => b - a)
+const circuitSizes = Array.from(circuits.values()).map((set) => set.size)
 
-const product = sizes.slice(0, 3).reduce((a, c) => a * c, 1)
+circuitSizes.sort((a, b) => b - a)
+
+const largestThree = circuitSizes.slice(0, 3)
+
+const product = largestThree.reduce((a, c) => a * c, 1)
 
 console.log(product)
