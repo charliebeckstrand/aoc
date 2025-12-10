@@ -6,11 +6,11 @@ const distances = []
 
 const getDistance = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2
 
-for (const [boxA, coordA] of coordinates.entries()) {
-	for (const [boxB, coordB] of coordinates.entries()) {
+for (const [boxA, posA] of coordinates.entries()) {
+	for (const [boxB, posB] of coordinates.entries()) {
 		if (boxB > boxA) {
 			distances.push({
-				distance: getDistance(coordA, coordB),
+				distance: getDistance(posA, posB),
 				pair: [boxA, boxB]
 			})
 		}
