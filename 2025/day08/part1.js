@@ -2,14 +2,20 @@ import input from './input.js'
 
 const coordinates = input.map((line) => line.split(',').map(Number))
 
+const distances = []
+
 const getDistance = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2
 
-const distances = coordinates.flatMap((first, from) =>
-	coordinates.slice(from + 1).map((second, to) => ({
-		distance: getDistance(first, second),
-		pair: [from, from + 1 + to]
-	}))
-)
+for (const [boxA, coordA] of coordinates.entries()) {
+	for (const [boxB, coordB] of coordinates.entries()) {
+		if (boxB > boxA) {
+			distances.push({
+				distance: getDistance(coordA, coordB),
+				pair: [boxA, boxB]
+			})
+		}
+	}
+}
 
 distances.sort((a, b) => a.distance - b.distance)
 
