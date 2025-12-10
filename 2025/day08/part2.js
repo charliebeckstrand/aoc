@@ -24,7 +24,7 @@ const circuit = coordinates.map((_, i) => i)
 const find = (i) => (circuit[i] === i ? i : (circuit[i] = find(circuit[i])))
 
 let groups = coordinates.length
-let boxes = []
+let multiplicands = []
 
 for (const {
 	pair: [i, j]
@@ -35,11 +35,11 @@ for (const {
 
 	circuit[b] = a
 
-	boxes = [i, j]
+	multiplicands = [i, j]
 
 	if (--groups === 1) break
 }
 
-const [x1, x2] = boxes.map((i) => coordinates[i][0])
+const [x1, x2] = multiplicands.map((i) => coordinates[i][0])
 
 console.log(x1 * x2)
